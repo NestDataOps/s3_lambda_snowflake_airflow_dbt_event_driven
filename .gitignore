@@ -1,0 +1,28 @@
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfvars
+!*.tfvars.example
+crash.log
+
+*DS_Store
+# Lambda build artifacts
+lambda/build/
+
+airflow/logs/
+airflow/dbt/target/
+ansible/templates/
+
+# dbt
+dbt/profiles.yml
+dbt/target/
+dbt/dbt_packages/
+dbt/logs/
+
+# Python
+__pycache__/
+*.pyc
+
+# Sample data generated locally
+scripts/sample_data/

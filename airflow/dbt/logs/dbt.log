@@ -1,0 +1,698 @@
+[0m01:12:17.882074 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7fa639740f20>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7fa638dad340>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7fa63b1b70b0>]}
+
+
+============================== 01:12:17.898556 | 61ca853d-52b0-461d-be94-2d9abe1b3583 ==============================
+[0m01:12:17.898556 [info ] [MainThread]: Running with dbt=1.12.0
+[0m01:12:17.900572 [debug] [MainThread]: running dbt with arguments {'write_json': 'True', 'indirect_selection': 'eager', 'version_check': 'True', 'debug': 'False', 'introspect': 'True', 'target_path': 'None', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'log_cache_events': 'False', 'profiles_dir': '/opt/airflow/dbt', 'log_format': 'default', 'static_parser': 'True', 'no_print': 'None', 'fail_fast': 'False', 'warn_error': 'None', 'partial_parse': 'True', 'use_colors': 'True', 'cache_selected_only': 'False', 'send_anonymous_usage_stats': 'True', 'empty': 'False', 'log_path': '/opt/airflow/dbt/logs', 'quiet': 'False', 'printer_width': '80', 'maximum_seed_size_mib': '1', 'use_experimental_parser': 'False', 'invocation_command': 'dbt run --profiles-dir /opt/airflow/dbt --select staging marts', 'hints_enabled': 'True'}
+[0m01:12:17.908099 [error] [MainThread]: [[31mERROR[0m]: Encountered an error:
+Runtime Error
+  Could not find profile named 'event_driven_pipeline'
+[0m01:12:17.911045 [debug] [MainThread]: Resource report: {"command_name": "run", "command_success": false, "command_wall_clock_time": 0.27267268, "process_in_blocks": "1960", "process_kernel_time": 0.783325, "process_mem_max_rss": "110676", "process_out_blocks": "3", "process_user_time": 6.945701}
+[0m01:12:17.914103 [debug] [MainThread]: Command `dbt run` failed at 01:12:17.913823 after 0.28 seconds
+[0m01:12:17.920447 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7fa6381d0e00>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7fa63b1b70b0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7fa637f9a8a0>]}
+[0m01:12:17.925125 [debug] [MainThread]: Flushing usage events
+[0m01:12:19.319282 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m01:13:33.203839 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f03f92ac3e0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f03f6bbce00>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f03f70955b0>]}
+
+
+============================== 01:13:33.217892 | 57a5c97d-9a61-4238-9aa1-635216530969 ==============================
+[0m01:13:33.217892 [info ] [MainThread]: Running with dbt=1.12.0
+[0m01:13:33.219553 [debug] [MainThread]: running dbt with arguments {'use_experimental_parser': 'False', 'quiet': 'False', 'partial_parse': 'True', 'log_format': 'default', 'cache_selected_only': 'False', 'hints_enabled': 'True', 'version_check': 'True', 'empty': 'None', 'debug': 'False', 'warn_error': 'None', 'no_print': 'None', 'use_colors': 'True', 'profiles_dir': '/home/airflow/.dbt', 'target_path': 'None', 'log_path': '/opt/airflow/dbt/logs', 'log_cache_events': 'False', 'static_parser': 'True', 'invocation_command': 'dbt debug', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'write_json': 'True', 'maximum_seed_size_mib': '1', 'fail_fast': 'False', 'printer_width': '80', 'introspect': 'True', 'indirect_selection': 'eager', 'send_anonymous_usage_stats': 'True'}
+[0m01:13:33.240137 [info ] [MainThread]: dbt version: 1.12.0
+[0m01:13:33.242416 [info ] [MainThread]: python version: 3.12.8
+[0m01:13:33.243935 [info ] [MainThread]: python path: /opt/airflow/dbt_venv/bin/python3.12
+[0m01:13:33.246420 [info ] [MainThread]: os info: Linux-6.10.14-linuxkit-x86_64-with-glibc2.36
+[0m01:13:33.250831 [info ] [MainThread]: Using profiles dir at /home/airflow/.dbt
+[0m01:13:33.252324 [info ] [MainThread]: Using profiles.yml file at /home/airflow/.dbt/profiles.yml
+[0m01:13:33.255010 [info ] [MainThread]: Using dbt_project.yml file at /opt/airflow/dbt/dbt_project.yml
+[0m01:13:33.503127 [info ] [MainThread]: Configuration:
+[0m01:13:33.504283 [info ] [MainThread]:   profiles.yml file [[31mERROR not found[0m]
+[0m01:13:33.505384 [info ] [MainThread]:   dbt_project.yml file [[32mOK found and valid[0m]
+[0m01:13:33.506447 [info ] [MainThread]: Required dependencies:
+[0m01:13:33.507636 [debug] [MainThread]: Executing "git --help"
+[0m01:13:33.509766 [info ] [MainThread]:  - git [[31mERROR[0m]
+
+[0m01:13:33.510619 [info ] [MainThread]: Connection test skipped since no profile was found
+[0m01:13:33.511754 [info ] [MainThread]: [31m2 checks failed:[0m
+[0m01:13:33.543775 [info ] [MainThread]: dbt looked for a profiles.yml file in /home/airflow/.dbt/profiles.yml, but did
+not find one. For more information on configuring your profile, consult the
+documentation:
+
+https://docs.getdbt.com/docs/configure-your-profile
+
+
+[0m01:13:33.545114 [info ] [MainThread]: Error from git --help: User does not have permissions for this command: "git"
+
+[0m01:13:33.549113 [debug] [MainThread]: Resource report: {"command_name": "debug", "command_success": false, "command_wall_clock_time": 0.49365994, "process_in_blocks": "0", "process_kernel_time": 0.339836, "process_mem_max_rss": "112084", "process_out_blocks": "5", "process_user_time": 4.511471}
+[0m01:13:33.550857 [debug] [MainThread]: Command `dbt debug` failed at 01:13:33.550642 after 0.50 seconds
+[0m01:13:33.551781 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f03f7b1f380>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f03f71f2090>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f03f71f0950>]}
+[0m01:13:33.552819 [debug] [MainThread]: Flushing usage events
+[0m01:13:34.508608 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m01:14:27.533347 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f1b7a0c74a0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f1b771716d0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f1b788be540>]}
+
+
+============================== 01:14:27.544345 | 11c6bff9-a059-4d7b-b228-33eeb1498c30 ==============================
+[0m01:14:27.544345 [info ] [MainThread]: Running with dbt=1.12.0
+[0m01:14:27.547074 [debug] [MainThread]: running dbt with arguments {'log_format': 'default', 'indirect_selection': 'eager', 'use_colors': 'True', 'quiet': 'False', 'send_anonymous_usage_stats': 'True', 'printer_width': '80', 'partial_parse': 'True', 'log_path': '/opt/airflow/dbt/logs', 'profiles_dir': '/opt/airflow/dbt', 'warn_error': 'None', 'no_print': 'None', 'log_cache_events': 'False', 'maximum_seed_size_mib': '1', 'invocation_command': 'dbt run --profiles-dir /opt/airflow/dbt --select staging marts', 'empty': 'False', 'cache_selected_only': 'False', 'hints_enabled': 'True', 'introspect': 'True', 'write_json': 'True', 'target_path': 'None', 'version_check': 'True', 'debug': 'False', 'static_parser': 'True', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'use_experimental_parser': 'False', 'fail_fast': 'False'}
+[0m01:14:27.552931 [error] [MainThread]: [[31mERROR[0m]: Encountered an error:
+Runtime Error
+  Could not find profile named 'event_driven_pipeline'
+[0m01:14:27.555164 [debug] [MainThread]: Resource report: {"command_name": "run", "command_success": false, "command_wall_clock_time": 0.1859909, "process_in_blocks": "0", "process_kernel_time": 0.320669, "process_mem_max_rss": "110884", "process_out_blocks": "3", "process_user_time": 4.157573}
+[0m01:14:27.556955 [debug] [MainThread]: Command `dbt run` failed at 01:14:27.556696 after 0.19 seconds
+[0m01:14:27.557877 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f1b771c0410>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f1b771c18b0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f1b76f430e0>]}
+[0m01:14:27.558839 [debug] [MainThread]: Flushing usage events
+[0m01:14:28.568585 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m01:20:22.900741 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7fca779436b0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7fca77943c20>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7fca77e399d0>]}
+
+
+============================== 01:20:22.913022 | 32dccf6f-6c22-4685-8352-e79f3d0c90b1 ==============================
+[0m01:20:22.913022 [info ] [MainThread]: Running with dbt=1.12.0
+[0m01:20:22.914510 [debug] [MainThread]: running dbt with arguments {'no_print': 'None', 'log_path': '/opt/airflow/dbt/logs', 'cache_selected_only': 'False', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'log_cache_events': 'False', 'indirect_selection': 'eager', 'printer_width': '80', 'quiet': 'False', 'target_path': 'None', 'use_experimental_parser': 'False', 'empty': 'False', 'use_colors': 'True', 'log_format': 'default', 'maximum_seed_size_mib': '1', 'send_anonymous_usage_stats': 'True', 'profiles_dir': '/opt/airflow/dbt', 'hints_enabled': 'True', 'debug': 'False', 'write_json': 'True', 'version_check': 'True', 'fail_fast': 'False', 'warn_error': 'None', 'invocation_command': 'dbt run --profiles-dir /opt/airflow/dbt --select staging marts', 'static_parser': 'True', 'introspect': 'True', 'partial_parse': 'True'}
+[0m01:20:23.735517 [debug] [MainThread]: Snowflake adapter: Setting snowflake.connector to ERROR (file logging only)
+[0m01:20:23.736807 [debug] [MainThread]: Snowflake adapter: Setting botocore to ERROR (file logging only)
+[0m01:20:23.738053 [debug] [MainThread]: Snowflake adapter: Setting boto3 to ERROR (file logging only)
+[0m01:20:24.213517 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': '32dccf6f-6c22-4685-8352-e79f3d0c90b1', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7fca767f2f30>]}
+[0m01:20:24.410486 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'adapter_info', 'label': '32dccf6f-6c22-4685-8352-e79f3d0c90b1', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7fca75010470>]}
+[0m01:20:24.460188 [info ] [MainThread]: Registered adapter: snowflake=1.12.0
+[0m01:20:24.920647 [debug] [MainThread]: checksum: 26d8e1a267de9c1948312ed4a46d71999c92b888dd08a4b3873de28fecce6e28, vars: {}, profile: event_driven_pipeline, target: dev, version: 1.12.0
+[0m01:20:24.952410 [info ] [MainThread]: Unable to do partial parsing because saved manifest not found. Starting full parse.
+[0m01:20:24.955558 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'partial_parser', 'label': '32dccf6f-6c22-4685-8352-e79f3d0c90b1', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7fca750ddbb0>]}
+[0m01:20:28.887227 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'load_project', 'label': '32dccf6f-6c22-4685-8352-e79f3d0c90b1', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7fca6f481cd0>]}
+[0m01:20:29.191471 [debug] [MainThread]: Wrote artifact WritableManifest to /opt/airflow/dbt/target/manifest.json
+[0m01:20:29.203233 [debug] [MainThread]: Wrote artifact SemanticManifest to /opt/airflow/dbt/target/semantic_manifest.json
+[0m01:20:29.233652 [debug] [MainThread]: Wrote artifact OsiDocument to /opt/airflow/dbt/target/osi_document.json
+[0m01:20:29.254801 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'resource_counts', 'label': '32dccf6f-6c22-4685-8352-e79f3d0c90b1', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7fca76699340>]}
+[0m01:20:29.256177 [info ] [MainThread]: Found 2 models, 4 data tests, 1 source, 545 macros
+[0m01:20:29.258168 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': '32dccf6f-6c22-4685-8352-e79f3d0c90b1', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7fca6f925340>]}
+[0m01:20:29.261829 [info ] [MainThread]: 
+[0m01:20:29.264350 [info ] [MainThread]: Concurrency: 8 threads (target='dev')
+[0m01:20:29.265692 [info ] [MainThread]: 
+[0m01:20:29.267732 [debug] [MainThread]: Acquiring new snowflake connection 'master'
+[0m01:20:29.277332 [debug] [ThreadPool]: Acquiring new snowflake connection 'list_EVENTDRIVEN_PIPELINE_DB'
+[0m01:20:29.284871 [debug] [ThreadPool]: Acquiring new snowflake connection 'list_EVENTDRIVEN_PIPELINE_DB'
+[0m01:20:29.320045 [debug] [ThreadPool]: Using snowflake connection "list_EVENTDRIVEN_PIPELINE_DB"
+[0m01:20:29.321289 [debug] [ThreadPool]: Using snowflake connection "list_EVENTDRIVEN_PIPELINE_DB"
+[0m01:20:29.322041 [debug] [ThreadPool]: On list_EVENTDRIVEN_PIPELINE_DB: show terse schemas in database EVENTDRIVEN_PIPELINE_DB
+    limit 10000
+/* {"app": "dbt", "dbt_version": "1.12.0", "profile_name": "event_driven_pipeline", "target_name": "dev", "connection_name": "list_EVENTDRIVEN_PIPELINE_DB"} */
+[0m01:20:29.323196 [debug] [ThreadPool]: On list_EVENTDRIVEN_PIPELINE_DB: show terse schemas in database EVENTDRIVEN_PIPELINE_DB
+    limit 10000
+/* {"app": "dbt", "dbt_version": "1.12.0", "profile_name": "event_driven_pipeline", "target_name": "dev", "connection_name": "list_EVENTDRIVEN_PIPELINE_DB"} */
+[0m01:20:29.324353 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m01:20:29.325220 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m01:20:35.677755 [debug] [ThreadPool]: SQL status: SUCCESS 4 in 6.352 seconds
+[0m01:20:35.703285 [debug] [ThreadPool]: SQL status: SUCCESS 4 in 6.379 seconds
+[0m01:20:35.715402 [debug] [ThreadPool]: Re-using an available connection from the pool (formerly list_EVENTDRIVEN_PIPELINE_DB, now create_EVENTDRIVEN_PIPELINE_DB_raw_staging)
+[0m01:20:35.721612 [debug] [ThreadPool]: Re-using an available connection from the pool (formerly list_EVENTDRIVEN_PIPELINE_DB, now create_EVENTDRIVEN_PIPELINE_DB_raw_analytics)
+[0m01:20:35.723044 [debug] [ThreadPool]: Creating schema "database: "EVENTDRIVEN_PIPELINE_DB"
+schema: "raw_staging"
+"
+[0m01:20:35.724573 [debug] [ThreadPool]: Creating schema "database: "EVENTDRIVEN_PIPELINE_DB"
+schema: "raw_analytics"
+"
+[0m01:20:35.731735 [debug] [ThreadPool]: Using snowflake connection "create_EVENTDRIVEN_PIPELINE_DB_raw_staging"
+[0m01:20:35.734667 [debug] [ThreadPool]: Using snowflake connection "create_EVENTDRIVEN_PIPELINE_DB_raw_analytics"
+[0m01:20:35.735766 [debug] [ThreadPool]: On create_EVENTDRIVEN_PIPELINE_DB_raw_staging: create schema if not exists EVENTDRIVEN_PIPELINE_DB.raw_staging
+/* {"app": "dbt", "dbt_version": "1.12.0", "profile_name": "event_driven_pipeline", "target_name": "dev", "connection_name": "create_EVENTDRIVEN_PIPELINE_DB_raw_staging"} */
+[0m01:20:35.736738 [debug] [ThreadPool]: On create_EVENTDRIVEN_PIPELINE_DB_raw_analytics: create schema if not exists EVENTDRIVEN_PIPELINE_DB.raw_analytics
+/* {"app": "dbt", "dbt_version": "1.12.0", "profile_name": "event_driven_pipeline", "target_name": "dev", "connection_name": "create_EVENTDRIVEN_PIPELINE_DB_raw_analytics"} */
+[0m01:20:35.862258 [debug] [ThreadPool]: SQL status: SUCCESS 1 in 0.124 seconds
+[0m01:20:35.885728 [debug] [ThreadPool]: SQL status: SUCCESS 1 in 0.146 seconds
+[0m01:20:35.889979 [debug] [ThreadPool]: Re-using an available connection from the pool (formerly create_EVENTDRIVEN_PIPELINE_DB_raw_analytics, now list_EVENTDRIVEN_PIPELINE_DB_raw_staging)
+[0m01:20:35.891421 [debug] [ThreadPool]: Re-using an available connection from the pool (formerly create_EVENTDRIVEN_PIPELINE_DB_raw_staging, now list_EVENTDRIVEN_PIPELINE_DB_raw_analytics)
+[0m01:20:35.925883 [debug] [ThreadPool]: Using snowflake connection "list_EVENTDRIVEN_PIPELINE_DB_raw_staging"
+[0m01:20:35.930762 [debug] [ThreadPool]: Using snowflake connection "list_EVENTDRIVEN_PIPELINE_DB_raw_analytics"
+[0m01:20:35.931744 [debug] [ThreadPool]: On list_EVENTDRIVEN_PIPELINE_DB_raw_staging: show objects in EVENTDRIVEN_PIPELINE_DB.raw_staging
+    limit 10000
+    
+
+/* {"app": "dbt", "dbt_version": "1.12.0", "profile_name": "event_driven_pipeline", "target_name": "dev", "connection_name": "list_EVENTDRIVEN_PIPELINE_DB_raw_staging"} */;
+[0m01:20:35.932868 [debug] [ThreadPool]: On list_EVENTDRIVEN_PIPELINE_DB_raw_analytics: show objects in EVENTDRIVEN_PIPELINE_DB.raw_analytics
+    limit 10000
+    
+
+/* {"app": "dbt", "dbt_version": "1.12.0", "profile_name": "event_driven_pipeline", "target_name": "dev", "connection_name": "list_EVENTDRIVEN_PIPELINE_DB_raw_analytics"} */;
+[0m01:20:36.057299 [debug] [ThreadPool]: SQL status: SUCCESS 0 in 0.123 seconds
+[0m01:20:36.067049 [debug] [ThreadPool]: Using snowflake connection "list_EVENTDRIVEN_PIPELINE_DB_raw_staging"
+[0m01:20:36.068195 [debug] [ThreadPool]: On list_EVENTDRIVEN_PIPELINE_DB_raw_staging: show user functions in EVENTDRIVEN_PIPELINE_DB.raw_staging
+/* {"app": "dbt", "dbt_version": "1.12.0", "profile_name": "event_driven_pipeline", "target_name": "dev", "connection_name": "list_EVENTDRIVEN_PIPELINE_DB_raw_staging"} */
+[0m01:20:36.106819 [debug] [ThreadPool]: SQL status: SUCCESS 0 in 0.170 seconds
+[0m01:20:36.111460 [debug] [ThreadPool]: Using snowflake connection "list_EVENTDRIVEN_PIPELINE_DB_raw_analytics"
+[0m01:20:36.112613 [debug] [ThreadPool]: On list_EVENTDRIVEN_PIPELINE_DB_raw_analytics: show user functions in EVENTDRIVEN_PIPELINE_DB.raw_analytics
+/* {"app": "dbt", "dbt_version": "1.12.0", "profile_name": "event_driven_pipeline", "target_name": "dev", "connection_name": "list_EVENTDRIVEN_PIPELINE_DB_raw_analytics"} */
+[0m01:20:36.210547 [debug] [ThreadPool]: SQL status: SUCCESS 0 in 0.141 seconds
+[0m01:20:36.230381 [debug] [ThreadPool]: SQL status: SUCCESS 0 in 0.117 seconds
+[0m01:20:36.234766 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': '32dccf6f-6c22-4685-8352-e79f3d0c90b1', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7fca74b53cb0>]}
+[0m01:20:36.251464 [debug] [Thread-2 (]: Began running node model.event_driven_pipeline.stg_events
+[0m01:20:36.252824 [info ] [Thread-2 (]: 1 of 2 START sql view model raw_staging.stg_events ............................. [RUN]
+[0m01:20:36.254201 [debug] [Thread-2 (]: Re-using an available connection from the pool (formerly list_EVENTDRIVEN_PIPELINE_DB_raw_analytics, now model.event_driven_pipeline.stg_events)
+[0m01:20:36.255309 [debug] [Thread-2 (]: Began compiling node model.event_driven_pipeline.stg_events
+[0m01:20:36.268012 [debug] [Thread-2 (]: Writing injected SQL for node "model.event_driven_pipeline.stg_events"
+[0m01:20:36.273923 [debug] [Thread-2 (]: Began executing node model.event_driven_pipeline.stg_events
+[0m01:20:36.331115 [debug] [Thread-2 (]: Writing runtime sql for node "model.event_driven_pipeline.stg_events"
+[0m01:20:36.338316 [debug] [Thread-2 (]: Using snowflake connection "model.event_driven_pipeline.stg_events"
+[0m01:20:36.339453 [debug] [Thread-2 (]: On model.event_driven_pipeline.stg_events: create or replace   view EVENTDRIVEN_PIPELINE_DB.raw_staging.stg_events
+  
+  
+  
+  
+  as (
+    with source as (
+    select * from EVENTDRIVEN_PIPELINE_DB.RAW.raw_events
+),
+
+flattened as (
+    select
+        event_id,
+        event_type,
+        source_file_name,
+        ingested_at,
+        event_payload:user_id::string        as user_id,
+        event_payload:amount::float          as amount,
+        event_payload:currency::string       as currency,
+        event_payload:created_at::timestamp  as event_created_at
+    from source
+)
+
+select * from flattened
+  )
+/* {"app": "dbt", "dbt_version": "1.12.0", "profile_name": "event_driven_pipeline", "target_name": "dev", "node_id": "model.event_driven_pipeline.stg_events"} */;
+[0m01:20:36.673938 [debug] [Thread-2 (]: SQL status: SUCCESS 1 in 0.333 seconds
+[0m01:20:36.727919 [debug] [Thread-2 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '32dccf6f-6c22-4685-8352-e79f3d0c90b1', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7fca7669b170>]}
+[0m01:20:36.735724 [info ] [Thread-2 (]: 1 of 2 OK created sql view model raw_staging.stg_events ........................ [[32mSUCCESS 1[0m in 0.47s]
+[0m01:20:36.740274 [debug] [Thread-2 (]: Finished running node model.event_driven_pipeline.stg_events
+[0m01:20:36.744658 [debug] [Thread-4 (]: Began running node model.event_driven_pipeline.analytics_events_daily
+[0m01:20:36.746051 [info ] [Thread-4 (]: 2 of 2 START sql table model raw_analytics.analytics_events_daily .............. [RUN]
+[0m01:20:36.747941 [debug] [Thread-4 (]: Acquiring new snowflake connection 'model.event_driven_pipeline.analytics_events_daily'
+[0m01:20:36.748878 [debug] [Thread-4 (]: Began compiling node model.event_driven_pipeline.analytics_events_daily
+[0m01:20:36.752621 [debug] [Thread-4 (]: Writing injected SQL for node "model.event_driven_pipeline.analytics_events_daily"
+[0m01:20:36.756602 [debug] [Thread-4 (]: Began executing node model.event_driven_pipeline.analytics_events_daily
+[0m01:20:36.896057 [debug] [Thread-4 (]: Writing runtime sql for node "model.event_driven_pipeline.analytics_events_daily"
+[0m01:20:36.955544 [debug] [Thread-4 (]: Using snowflake connection "model.event_driven_pipeline.analytics_events_daily"
+[0m01:20:36.964210 [debug] [Thread-4 (]: On model.event_driven_pipeline.analytics_events_daily: create or replace transient table EVENTDRIVEN_PIPELINE_DB.raw_analytics.analytics_events_daily
+    
+    
+    
+    
+    
+
+    as (with events as (
+    select * from EVENTDRIVEN_PIPELINE_DB.raw_staging.stg_events
+)
+
+select
+    date_trunc('day', event_created_at) as event_date,
+    event_type,
+    currency,
+    count(*)          as event_count,
+    sum(amount)        as total_amount,
+    avg(amount)         as avg_amount
+from events
+group by 1, 2, 3
+    )
+
+/* {"app": "dbt", "dbt_version": "1.12.0", "profile_name": "event_driven_pipeline", "target_name": "dev", "node_id": "model.event_driven_pipeline.analytics_events_daily"} */;
+[0m01:20:36.967148 [debug] [Thread-4 (]: Opening a new connection, currently in state init
+[0m01:20:38.875893 [debug] [Thread-4 (]: SQL status: SUCCESS 14 in 1.909 seconds
+[0m01:20:38.881094 [debug] [Thread-4 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '32dccf6f-6c22-4685-8352-e79f3d0c90b1', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7fca6e71ba70>]}
+[0m01:20:38.882517 [info ] [Thread-4 (]: 2 of 2 OK created sql table model raw_analytics.analytics_events_daily ......... [[32mSUCCESS 14[0m in 2.13s]
+[0m01:20:38.884801 [debug] [Thread-4 (]: Finished running node model.event_driven_pipeline.analytics_events_daily
+[0m01:20:38.894004 [debug] [MainThread]: Connection 'master' was properly closed.
+[0m01:20:38.894947 [debug] [MainThread]: Connection 'model.event_driven_pipeline.stg_events' was left open.
+[0m01:20:38.895814 [debug] [MainThread]: On model.event_driven_pipeline.stg_events: Close
+[0m01:20:38.987183 [debug] [MainThread]: Connection 'list_EVENTDRIVEN_PIPELINE_DB_raw_staging' was left open.
+[0m01:20:38.988769 [debug] [MainThread]: On list_EVENTDRIVEN_PIPELINE_DB_raw_staging: Close
+[0m01:20:39.070729 [debug] [MainThread]: Connection 'model.event_driven_pipeline.analytics_events_daily' was left open.
+[0m01:20:39.072290 [debug] [MainThread]: On model.event_driven_pipeline.analytics_events_daily: Close
+[0m01:20:39.159642 [info ] [MainThread]: 
+[0m01:20:39.161337 [info ] [MainThread]: Finished running 1 table model, 1 view model in 0 hours 0 minutes and 9.89 seconds (9.89s).
+[0m01:20:39.164428 [debug] [MainThread]: Command end result
+[0m01:20:39.294407 [debug] [MainThread]: Wrote artifact WritableManifest to /opt/airflow/dbt/target/manifest.json
+[0m01:20:39.300785 [debug] [MainThread]: Wrote artifact SemanticManifest to /opt/airflow/dbt/target/semantic_manifest.json
+[0m01:20:39.308338 [debug] [MainThread]: Wrote artifact OsiDocument to /opt/airflow/dbt/target/osi_document.json
+[0m01:20:39.324292 [debug] [MainThread]: Wrote artifact RunExecutionResult to /opt/airflow/dbt/target/run_results.json
+[0m01:20:39.325143 [info ] [MainThread]: 
+[0m01:20:39.326557 [info ] [MainThread]: [32mCompleted successfully[0m
+[0m01:20:39.327520 [info ] [MainThread]: 
+[0m01:20:39.329910 [info ] [MainThread]: Done. PASS=2 WARN=0 ERROR=0 SKIP=0 NO-OP=0 REUSED=0 TOTAL=2
+[0m01:20:39.332253 [debug] [MainThread]: Resource report: {"command_name": "run", "command_success": true, "command_wall_clock_time": 16.59626, "process_in_blocks": "144", "process_kernel_time": 2.525634, "process_mem_max_rss": "181032", "process_out_blocks": "13772", "process_user_time": 14.380145}
+[0m01:20:39.333468 [debug] [MainThread]: Command `dbt run` succeeded at 01:20:39.333273 after 16.60 seconds
+[0m01:20:39.335391 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7fca776006b0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7fca6fe35970>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7fca6f676f00>]}
+[0m01:20:39.336366 [debug] [MainThread]: Flushing usage events
+[0m01:20:40.475186 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m01:20:53.052101 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f4f1d8b9430>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f4f1d8bb590>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f4f1d8b94c0>]}
+
+
+============================== 01:20:53.063428 | 04aa20ed-c95f-4ec4-8aac-48359605ac45 ==============================
+[0m01:20:53.063428 [info ] [MainThread]: Running with dbt=1.12.0
+[0m01:20:53.065121 [debug] [MainThread]: running dbt with arguments {'static_parser': 'True', 'indirect_selection': 'eager', 'printer_width': '80', 'maximum_seed_size_mib': '1', 'log_cache_events': 'False', 'fail_fast': 'False', 'introspect': 'True', 'version_check': 'True', 'log_format': 'default', 'invocation_command': 'dbt test --profiles-dir /opt/airflow/dbt', 'use_experimental_parser': 'False', 'send_anonymous_usage_stats': 'True', 'hints_enabled': 'True', 'cache_selected_only': 'False', 'debug': 'False', 'log_path': '/opt/airflow/dbt/logs', 'target_path': 'None', 'empty': 'None', 'no_print': 'None', 'write_json': 'True', 'profiles_dir': '/opt/airflow/dbt', 'partial_parse': 'True', 'quiet': 'False', 'use_colors': 'True', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'warn_error': 'None'}
+[0m01:20:53.912483 [debug] [MainThread]: Snowflake adapter: Setting snowflake.connector to ERROR (file logging only)
+[0m01:20:53.913638 [debug] [MainThread]: Snowflake adapter: Setting botocore to ERROR (file logging only)
+[0m01:20:53.914625 [debug] [MainThread]: Snowflake adapter: Setting boto3 to ERROR (file logging only)
+[0m01:20:54.561923 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': '04aa20ed-c95f-4ec4-8aac-48359605ac45', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f4f1ab1fa70>]}
+[0m01:20:54.922643 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'adapter_info', 'label': '04aa20ed-c95f-4ec4-8aac-48359605ac45', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f4f1c1e1700>]}
+[0m01:20:54.943070 [info ] [MainThread]: Registered adapter: snowflake=1.12.0
+[0m01:20:55.862071 [debug] [MainThread]: checksum: 26d8e1a267de9c1948312ed4a46d71999c92b888dd08a4b3873de28fecce6e28, vars: {}, profile: event_driven_pipeline, target: dev, version: 1.12.0
+[0m01:20:56.366520 [debug] [MainThread]: Partial parsing enabled: 0 files deleted, 0 files added, 0 files changed.
+[0m01:20:56.367597 [debug] [MainThread]: Nothing changed, skipping partial parsing.
+[0m01:20:56.368498 [debug] [MainThread]: Partial parsing enabled, no changes found, skipping parsing
+[0m01:20:56.388553 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'load_project', 'label': '04aa20ed-c95f-4ec4-8aac-48359605ac45', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f4f1aaab0b0>]}
+[0m01:20:56.901681 [debug] [MainThread]: Wrote artifact WritableManifest to /opt/airflow/dbt/target/manifest.json
+[0m01:20:56.915781 [debug] [MainThread]: Wrote artifact SemanticManifest to /opt/airflow/dbt/target/semantic_manifest.json
+[0m01:20:56.970755 [debug] [MainThread]: Wrote artifact OsiDocument to /opt/airflow/dbt/target/osi_document.json
+[0m01:20:57.030044 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'resource_counts', 'label': '04aa20ed-c95f-4ec4-8aac-48359605ac45', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f4f1a43f080>]}
+[0m01:20:57.031257 [info ] [MainThread]: Found 2 models, 4 data tests, 1 source, 545 macros
+[0m01:20:57.032706 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': '04aa20ed-c95f-4ec4-8aac-48359605ac45', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f4f1a413d10>]}
+[0m01:20:57.037108 [info ] [MainThread]: 
+[0m01:20:57.039728 [info ] [MainThread]: Concurrency: 8 threads (target='dev')
+[0m01:20:57.042027 [info ] [MainThread]: 
+[0m01:20:57.044636 [debug] [MainThread]: Acquiring new snowflake connection 'master'
+[0m01:20:57.048411 [debug] [ThreadPool]: Acquiring new snowflake connection 'list_EVENTDRIVEN_PIPELINE_DB_raw_staging'
+[0m01:20:57.058427 [debug] [ThreadPool]: Acquiring new snowflake connection 'list_EVENTDRIVEN_PIPELINE_DB_raw_analytics'
+[0m01:20:57.129598 [debug] [ThreadPool]: Using snowflake connection "list_EVENTDRIVEN_PIPELINE_DB_raw_staging"
+[0m01:20:57.131027 [debug] [ThreadPool]: Using snowflake connection "list_EVENTDRIVEN_PIPELINE_DB_raw_analytics"
+[0m01:20:57.131765 [debug] [ThreadPool]: On list_EVENTDRIVEN_PIPELINE_DB_raw_staging: show objects in EVENTDRIVEN_PIPELINE_DB.raw_staging
+    limit 10000
+    
+
+/* {"app": "dbt", "dbt_version": "1.12.0", "profile_name": "event_driven_pipeline", "target_name": "dev", "connection_name": "list_EVENTDRIVEN_PIPELINE_DB_raw_staging"} */;
+[0m01:20:57.132967 [debug] [ThreadPool]: On list_EVENTDRIVEN_PIPELINE_DB_raw_analytics: show objects in EVENTDRIVEN_PIPELINE_DB.raw_analytics
+    limit 10000
+    
+
+/* {"app": "dbt", "dbt_version": "1.12.0", "profile_name": "event_driven_pipeline", "target_name": "dev", "connection_name": "list_EVENTDRIVEN_PIPELINE_DB_raw_analytics"} */;
+[0m01:20:57.134135 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m01:20:57.135725 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m01:20:58.436406 [debug] [ThreadPool]: SQL status: SUCCESS 1 in 1.302 seconds
+[0m01:20:58.453587 [debug] [ThreadPool]: Using snowflake connection "list_EVENTDRIVEN_PIPELINE_DB_raw_staging"
+[0m01:20:58.455065 [debug] [ThreadPool]: On list_EVENTDRIVEN_PIPELINE_DB_raw_staging: show user functions in EVENTDRIVEN_PIPELINE_DB.raw_staging
+/* {"app": "dbt", "dbt_version": "1.12.0", "profile_name": "event_driven_pipeline", "target_name": "dev", "connection_name": "list_EVENTDRIVEN_PIPELINE_DB_raw_staging"} */
+[0m01:20:58.461017 [debug] [ThreadPool]: SQL status: SUCCESS 1 in 1.325 seconds
+[0m01:20:58.467186 [debug] [ThreadPool]: Using snowflake connection "list_EVENTDRIVEN_PIPELINE_DB_raw_analytics"
+[0m01:20:58.468618 [debug] [ThreadPool]: On list_EVENTDRIVEN_PIPELINE_DB_raw_analytics: show user functions in EVENTDRIVEN_PIPELINE_DB.raw_analytics
+/* {"app": "dbt", "dbt_version": "1.12.0", "profile_name": "event_driven_pipeline", "target_name": "dev", "connection_name": "list_EVENTDRIVEN_PIPELINE_DB_raw_analytics"} */
+[0m01:20:58.543558 [debug] [ThreadPool]: SQL status: SUCCESS 0 in 0.087 seconds
+[0m01:20:58.558021 [debug] [ThreadPool]: SQL status: SUCCESS 0 in 0.088 seconds
+[0m01:20:58.563127 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': '04aa20ed-c95f-4ec4-8aac-48359605ac45', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f4f1a43ef60>]}
+[0m01:20:58.595345 [debug] [Thread-2 (]: Began running node test.event_driven_pipeline.not_null_stg_events_event_id.715b3f7012
+[0m01:20:58.603150 [debug] [Thread-4 (]: Began running node test.event_driven_pipeline.source_not_null_raw_raw_events_event_id.b5e74ac7e4
+[0m01:20:58.596784 [debug] [Thread-3 (]: Began running node test.event_driven_pipeline.not_null_stg_events_event_type.ca8d147ba2
+[0m01:20:58.606152 [debug] [Thread-5 (]: Began running node test.event_driven_pipeline.unique_stg_events_event_id.66ebb17438
+[0m01:20:58.604169 [info ] [Thread-2 (]: 1 of 4 START test not_null_stg_events_event_id ................................. [RUN]
+[0m01:20:58.607832 [info ] [Thread-4 (]: 3 of 4 START test source_not_null_raw_raw_events_event_id ...................... [RUN]
+[0m01:20:58.609069 [info ] [Thread-3 (]: 2 of 4 START test not_null_stg_events_event_type ............................... [RUN]
+[0m01:20:58.610302 [info ] [Thread-5 (]: 4 of 4 START test unique_stg_events_event_id ................................... [RUN]
+[0m01:20:58.611758 [debug] [Thread-2 (]: Re-using an available connection from the pool (formerly list_EVENTDRIVEN_PIPELINE_DB_raw_analytics, now test.event_driven_pipeline.not_null_stg_events_event_id.715b3f7012)
+[0m01:20:58.613389 [debug] [Thread-4 (]: Acquiring new snowflake connection 'test.event_driven_pipeline.source_not_null_raw_raw_events_event_id.b5e74ac7e4'
+[0m01:20:58.615280 [debug] [Thread-3 (]: Re-using an available connection from the pool (formerly list_EVENTDRIVEN_PIPELINE_DB_raw_staging, now test.event_driven_pipeline.not_null_stg_events_event_type.ca8d147ba2)
+[0m01:20:58.616832 [debug] [Thread-5 (]: Acquiring new snowflake connection 'test.event_driven_pipeline.unique_stg_events_event_id.66ebb17438'
+[0m01:20:58.617943 [debug] [Thread-2 (]: Began compiling node test.event_driven_pipeline.not_null_stg_events_event_id.715b3f7012
+[0m01:20:58.619038 [debug] [Thread-4 (]: Began compiling node test.event_driven_pipeline.source_not_null_raw_raw_events_event_id.b5e74ac7e4
+[0m01:20:58.619938 [debug] [Thread-3 (]: Began compiling node test.event_driven_pipeline.not_null_stg_events_event_type.ca8d147ba2
+[0m01:20:58.621232 [debug] [Thread-5 (]: Began compiling node test.event_driven_pipeline.unique_stg_events_event_id.66ebb17438
+[0m01:20:58.679001 [debug] [Thread-4 (]: Writing injected SQL for node "test.event_driven_pipeline.source_not_null_raw_raw_events_event_id.b5e74ac7e4"
+[0m01:20:58.681419 [debug] [Thread-2 (]: Writing injected SQL for node "test.event_driven_pipeline.not_null_stg_events_event_id.715b3f7012"
+[0m01:20:58.701853 [debug] [Thread-3 (]: Writing injected SQL for node "test.event_driven_pipeline.not_null_stg_events_event_type.ca8d147ba2"
+[0m01:20:58.714864 [debug] [Thread-5 (]: Writing injected SQL for node "test.event_driven_pipeline.unique_stg_events_event_id.66ebb17438"
+[0m01:20:58.719826 [debug] [Thread-4 (]: Began executing node test.event_driven_pipeline.source_not_null_raw_raw_events_event_id.b5e74ac7e4
+[0m01:20:58.733924 [debug] [Thread-3 (]: Began executing node test.event_driven_pipeline.not_null_stg_events_event_type.ca8d147ba2
+[0m01:20:58.734920 [debug] [Thread-2 (]: Began executing node test.event_driven_pipeline.not_null_stg_events_event_id.715b3f7012
+[0m01:20:58.831681 [debug] [Thread-5 (]: Began executing node test.event_driven_pipeline.unique_stg_events_event_id.66ebb17438
+[0m01:20:58.839319 [debug] [Thread-3 (]: Writing runtime sql for node "test.event_driven_pipeline.not_null_stg_events_event_type.ca8d147ba2"
+[0m01:20:58.841606 [debug] [Thread-4 (]: Writing runtime sql for node "test.event_driven_pipeline.source_not_null_raw_raw_events_event_id.b5e74ac7e4"
+[0m01:20:58.846232 [debug] [Thread-2 (]: Writing runtime sql for node "test.event_driven_pipeline.not_null_stg_events_event_id.715b3f7012"
+[0m01:20:58.850775 [debug] [Thread-5 (]: Writing runtime sql for node "test.event_driven_pipeline.unique_stg_events_event_id.66ebb17438"
+[0m01:20:58.857884 [debug] [Thread-2 (]: Using snowflake connection "test.event_driven_pipeline.not_null_stg_events_event_id.715b3f7012"
+[0m01:20:58.859620 [debug] [Thread-5 (]: Using snowflake connection "test.event_driven_pipeline.unique_stg_events_event_id.66ebb17438"
+[0m01:20:58.860823 [debug] [Thread-2 (]: On test.event_driven_pipeline.not_null_stg_events_event_id.715b3f7012: select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+
+
+select event_id
+from EVENTDRIVEN_PIPELINE_DB.raw_staging.stg_events
+where event_id is null
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+/* {"app": "dbt", "dbt_version": "1.12.0", "profile_name": "event_driven_pipeline", "target_name": "dev", "node_id": "test.event_driven_pipeline.not_null_stg_events_event_id.715b3f7012"} */
+[0m01:20:58.862190 [debug] [Thread-4 (]: Using snowflake connection "test.event_driven_pipeline.source_not_null_raw_raw_events_event_id.b5e74ac7e4"
+[0m01:20:58.863749 [debug] [Thread-3 (]: Using snowflake connection "test.event_driven_pipeline.not_null_stg_events_event_type.ca8d147ba2"
+[0m01:20:58.865221 [debug] [Thread-5 (]: On test.event_driven_pipeline.unique_stg_events_event_id.66ebb17438: select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+select
+    event_id as unique_field,
+    count(*) as n_records
+
+from EVENTDRIVEN_PIPELINE_DB.raw_staging.stg_events
+where event_id is not null
+group by event_id
+having count(*) > 1
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+/* {"app": "dbt", "dbt_version": "1.12.0", "profile_name": "event_driven_pipeline", "target_name": "dev", "node_id": "test.event_driven_pipeline.unique_stg_events_event_id.66ebb17438"} */
+[0m01:20:58.868820 [debug] [Thread-4 (]: On test.event_driven_pipeline.source_not_null_raw_raw_events_event_id.b5e74ac7e4: select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+
+
+select event_id
+from EVENTDRIVEN_PIPELINE_DB.RAW.raw_events
+where event_id is null
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+/* {"app": "dbt", "dbt_version": "1.12.0", "profile_name": "event_driven_pipeline", "target_name": "dev", "node_id": "test.event_driven_pipeline.source_not_null_raw_raw_events_event_id.b5e74ac7e4"} */
+[0m01:20:58.871100 [debug] [Thread-3 (]: On test.event_driven_pipeline.not_null_stg_events_event_type.ca8d147ba2: select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+
+
+select event_type
+from EVENTDRIVEN_PIPELINE_DB.raw_staging.stg_events
+where event_type is null
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+/* {"app": "dbt", "dbt_version": "1.12.0", "profile_name": "event_driven_pipeline", "target_name": "dev", "node_id": "test.event_driven_pipeline.not_null_stg_events_event_type.ca8d147ba2"} */
+[0m01:20:58.874155 [debug] [Thread-5 (]: Opening a new connection, currently in state init
+[0m01:20:58.875256 [debug] [Thread-4 (]: Opening a new connection, currently in state init
+[0m01:20:59.129958 [debug] [Thread-3 (]: SQL status: SUCCESS 1 in 0.254 seconds
+[0m01:20:59.149310 [info ] [Thread-3 (]: 2 of 4 PASS not_null_stg_events_event_type ..................................... [[32mPASS[0m in 0.53s]
+[0m01:20:59.151835 [debug] [Thread-3 (]: Finished running node test.event_driven_pipeline.not_null_stg_events_event_type.ca8d147ba2
+[0m01:20:59.246134 [debug] [Thread-2 (]: SQL status: SUCCESS 1 in 0.379 seconds
+[0m01:20:59.251019 [info ] [Thread-2 (]: 1 of 4 PASS not_null_stg_events_event_id ....................................... [[32mPASS[0m in 0.64s]
+[0m01:20:59.252890 [debug] [Thread-2 (]: Finished running node test.event_driven_pipeline.not_null_stg_events_event_id.715b3f7012
+[0m01:20:59.376872 [debug] [Thread-5 (]: SQL status: SUCCESS 1 in 0.503 seconds
+[0m01:20:59.380654 [info ] [Thread-5 (]: 4 of 4 PASS unique_stg_events_event_id ......................................... [[32mPASS[0m in 0.76s]
+[0m01:20:59.382870 [debug] [Thread-5 (]: Finished running node test.event_driven_pipeline.unique_stg_events_event_id.66ebb17438
+[0m01:20:59.520463 [debug] [Thread-4 (]: SQL status: SUCCESS 1 in 0.645 seconds
+[0m01:20:59.532075 [info ] [Thread-4 (]: 3 of 4 PASS source_not_null_raw_raw_events_event_id ............................ [[32mPASS[0m in 0.92s]
+[0m01:20:59.535860 [debug] [Thread-4 (]: Finished running node test.event_driven_pipeline.source_not_null_raw_raw_events_event_id.b5e74ac7e4
+[0m01:20:59.542839 [debug] [MainThread]: Connection 'master' was properly closed.
+[0m01:20:59.543771 [debug] [MainThread]: Connection 'test.event_driven_pipeline.not_null_stg_events_event_type.ca8d147ba2' was left open.
+[0m01:20:59.544607 [debug] [MainThread]: On test.event_driven_pipeline.not_null_stg_events_event_type.ca8d147ba2: Close
+[0m01:20:59.624962 [debug] [MainThread]: Connection 'test.event_driven_pipeline.not_null_stg_events_event_id.715b3f7012' was left open.
+[0m01:20:59.626219 [debug] [MainThread]: On test.event_driven_pipeline.not_null_stg_events_event_id.715b3f7012: Close
+[0m01:20:59.710017 [debug] [MainThread]: Connection 'test.event_driven_pipeline.source_not_null_raw_raw_events_event_id.b5e74ac7e4' was left open.
+[0m01:20:59.711290 [debug] [MainThread]: On test.event_driven_pipeline.source_not_null_raw_raw_events_event_id.b5e74ac7e4: Close
+[0m01:20:59.816809 [debug] [MainThread]: Connection 'test.event_driven_pipeline.unique_stg_events_event_id.66ebb17438' was left open.
+[0m01:20:59.818294 [debug] [MainThread]: On test.event_driven_pipeline.unique_stg_events_event_id.66ebb17438: Close
+[0m01:20:59.903961 [info ] [MainThread]: 
+[0m01:20:59.907728 [info ] [MainThread]: Finished running 4 data tests in 0 hours 0 minutes and 2.86 seconds (2.86s).
+[0m01:20:59.911210 [debug] [MainThread]: Command end result
+[0m01:21:00.063080 [debug] [MainThread]: Wrote artifact WritableManifest to /opt/airflow/dbt/target/manifest.json
+[0m01:21:00.070764 [debug] [MainThread]: Wrote artifact SemanticManifest to /opt/airflow/dbt/target/semantic_manifest.json
+[0m01:21:00.103530 [debug] [MainThread]: Wrote artifact OsiDocument to /opt/airflow/dbt/target/osi_document.json
+[0m01:21:00.123662 [debug] [MainThread]: Wrote artifact RunExecutionResult to /opt/airflow/dbt/target/run_results.json
+[0m01:21:00.124627 [info ] [MainThread]: 
+[0m01:21:00.126211 [info ] [MainThread]: [32mCompleted successfully[0m
+[0m01:21:00.127273 [info ] [MainThread]: 
+[0m01:21:00.128460 [info ] [MainThread]: Done. PASS=4 WARN=0 ERROR=0 SKIP=0 NO-OP=0 REUSED=0 TOTAL=4
+[0m01:21:00.130709 [debug] [MainThread]: Resource report: {"command_name": "test", "command_success": true, "command_wall_clock_time": 7.2355413, "process_in_blocks": "0", "process_kernel_time": 1.306977, "process_mem_max_rss": "173032", "process_out_blocks": "2730", "process_user_time": 11.478281}
+[0m01:21:00.131768 [debug] [MainThread]: Command `dbt test` succeeded at 01:21:00.131597 after 7.24 seconds
+[0m01:21:00.132896 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f4f22747140>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f4f1abf8ad0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f4f1a565d60>]}
+[0m01:21:00.136134 [debug] [MainThread]: Flushing usage events
+[0m01:21:01.546924 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m01:21:23.012101 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7fa544f6ef90>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7fa544492180>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7fa54309d520>]}
+
+
+============================== 01:21:23.024035 | 088581c0-3e59-402c-960c-cf623bfcc994 ==============================
+[0m01:21:23.024035 [info ] [MainThread]: Running with dbt=1.12.0
+[0m01:21:23.025742 [debug] [MainThread]: running dbt with arguments {'empty': 'None', 'quiet': 'False', 'log_path': '/opt/airflow/dbt/logs', 'no_print': 'None', 'log_format': 'default', 'hints_enabled': 'True', 'introspect': 'True', 'write_json': 'True', 'fail_fast': 'False', 'use_colors': 'True', 'cache_selected_only': 'False', 'indirect_selection': 'eager', 'maximum_seed_size_mib': '1', 'profiles_dir': '/opt/airflow/dbt', 'target_path': 'None', 'log_cache_events': 'False', 'invocation_command': 'dbt debug', 'static_parser': 'True', 'debug': 'False', 'send_anonymous_usage_stats': 'True', 'version_check': 'True', 'printer_width': '80', 'use_experimental_parser': 'False', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'warn_error': 'None', 'partial_parse': 'True'}
+[0m01:21:23.041618 [info ] [MainThread]: dbt version: 1.12.0
+[0m01:21:23.042895 [info ] [MainThread]: python version: 3.12.8
+[0m01:21:23.044512 [info ] [MainThread]: python path: /opt/airflow/dbt_venv/bin/python3.12
+[0m01:21:23.045759 [info ] [MainThread]: os info: Linux-6.10.14-linuxkit-x86_64-with-glibc2.36
+[0m01:21:23.937770 [debug] [MainThread]: Snowflake adapter: Setting snowflake.connector to ERROR (file logging only)
+[0m01:21:23.939153 [debug] [MainThread]: Snowflake adapter: Setting botocore to ERROR (file logging only)
+[0m01:21:23.940510 [debug] [MainThread]: Snowflake adapter: Setting boto3 to ERROR (file logging only)
+[0m01:21:24.149905 [info ] [MainThread]: Using profiles dir at /opt/airflow/dbt
+[0m01:21:24.151078 [info ] [MainThread]: Using profiles.yml file at /opt/airflow/dbt/profiles.yml
+[0m01:21:24.152340 [info ] [MainThread]: Using dbt_project.yml file at /opt/airflow/dbt/dbt_project.yml
+[0m01:21:24.154479 [info ] [MainThread]: adapter type: snowflake
+[0m01:21:24.156403 [info ] [MainThread]: adapter version: 1.12.0
+[0m01:21:24.408914 [info ] [MainThread]: Configuration:
+[0m01:21:24.410007 [info ] [MainThread]:   profiles.yml file [[32mOK found and valid[0m]
+[0m01:21:24.411271 [info ] [MainThread]:   dbt_project.yml file [[32mOK found and valid[0m]
+[0m01:21:24.412456 [info ] [MainThread]: Required dependencies:
+[0m01:21:24.414728 [debug] [MainThread]: Executing "git --help"
+[0m01:21:24.417096 [info ] [MainThread]:  - git [[31mERROR[0m]
+
+[0m01:21:24.418185 [info ] [MainThread]: Connection:
+[0m01:21:24.419580 [info ] [MainThread]:   account: IQFGCYU-UA55363
+[0m01:21:24.420766 [info ] [MainThread]:   user: NESTDATAOPS
+[0m01:21:24.421941 [info ] [MainThread]:   database: EVENTDRIVEN_PIPELINE_DB
+[0m01:21:24.423136 [info ] [MainThread]:   warehouse: EVENTDRIVEN_PIPELINE_WH
+[0m01:21:24.424256 [info ] [MainThread]:   role: accountadmin
+[0m01:21:24.425558 [info ] [MainThread]:   schema: raw
+[0m01:21:24.426662 [info ] [MainThread]:   authenticator: None
+[0m01:21:24.427847 [info ] [MainThread]:   oauth_client_id: None
+[0m01:21:24.429123 [info ] [MainThread]:   query_tag: None
+[0m01:21:24.430180 [info ] [MainThread]:   client_session_keep_alive: False
+[0m01:21:24.431266 [info ] [MainThread]:   host: None
+[0m01:21:24.432319 [info ] [MainThread]:   port: None
+[0m01:21:24.433967 [info ] [MainThread]:   proxy_host: None
+[0m01:21:24.434928 [info ] [MainThread]:   proxy_port: None
+[0m01:21:24.436293 [info ] [MainThread]:   protocol: None
+[0m01:21:24.437453 [info ] [MainThread]:   connect_retries: 1
+[0m01:21:24.438711 [info ] [MainThread]:   connect_timeout: None
+[0m01:21:24.440470 [info ] [MainThread]:   retry_on_database_errors: False
+[0m01:21:24.441479 [info ] [MainThread]:   retry_all: False
+[0m01:21:24.442607 [info ] [MainThread]:   insecure_mode: False
+[0m01:21:24.443993 [info ] [MainThread]:   reuse_connections: True
+[0m01:21:24.445325 [info ] [MainThread]:   s3_stage_vpce_dns_name: None
+[0m01:21:24.450181 [info ] [MainThread]:   workload_identity_provider: None
+[0m01:21:24.451710 [info ] [MainThread]:   workload_identity_entra_resource: None
+[0m01:21:24.452996 [info ] [MainThread]:   platform_detection_timeout_seconds: 0.0
+[0m01:21:24.454434 [info ] [MainThread]: Registered adapter: snowflake=1.12.0
+[0m01:21:24.709524 [debug] [MainThread]: Acquiring new snowflake connection 'debug'
+[0m01:21:24.715721 [debug] [MainThread]: Using snowflake connection "debug"
+[0m01:21:24.716668 [debug] [MainThread]: On debug: select 1 as id
+[0m01:21:24.717490 [debug] [MainThread]: Opening a new connection, currently in state init
+[0m01:21:25.543718 [debug] [MainThread]: SQL status: SUCCESS 1 in 0.826 seconds
+[0m01:21:25.545744 [info ] [MainThread]:   Connection test: [[32mOK connection ok[0m]
+
+[0m01:21:25.546782 [info ] [MainThread]: [31m1 check failed:[0m
+[0m01:21:25.547949 [info ] [MainThread]: Error from git --help: User does not have permissions for this command: "git"
+
+[0m01:21:25.550249 [debug] [MainThread]: Resource report: {"command_name": "debug", "command_success": false, "command_wall_clock_time": 2.751989, "process_in_blocks": "0", "process_kernel_time": 0.608369, "process_mem_max_rss": "154892", "process_out_blocks": "34", "process_user_time": 5.933714}
+[0m01:21:25.551561 [debug] [MainThread]: Command `dbt debug` failed at 01:21:25.551223 after 2.75 seconds
+[0m01:21:25.552443 [debug] [MainThread]: Connection 'debug' was left open.
+[0m01:21:25.553337 [debug] [MainThread]: On debug: Close
+[0m01:21:25.636702 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7fa543073f80>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7fa53f69c650>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7fa540a25ca0>]}
+[0m01:21:25.637790 [debug] [MainThread]: Flushing usage events
+[0m01:21:26.570039 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m01:22:15.486393 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f6bec625280>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f6bee31c0e0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f6befcefb90>]}
+
+
+============================== 01:22:15.496425 | 658ff761-bee8-496c-8797-bef49966f0d7 ==============================
+[0m01:22:15.496425 [info ] [MainThread]: Running with dbt=1.12.0
+[0m01:22:15.498115 [debug] [MainThread]: running dbt with arguments {'target_path': 'None', 'invocation_command': 'dbt run', 'empty': 'False', 'cache_selected_only': 'False', 'fail_fast': 'False', 'log_path': '/opt/airflow/dbt/logs', 'write_json': 'True', 'profiles_dir': '/opt/airflow/dbt', 'log_format': 'default', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'indirect_selection': 'eager', 'send_anonymous_usage_stats': 'True', 'maximum_seed_size_mib': '1', 'version_check': 'True', 'quiet': 'False', 'static_parser': 'True', 'use_experimental_parser': 'False', 'debug': 'False', 'log_cache_events': 'False', 'warn_error': 'None', 'partial_parse': 'True', 'no_print': 'None', 'use_colors': 'True', 'introspect': 'True', 'hints_enabled': 'True', 'printer_width': '80'}
+[0m01:22:16.193024 [debug] [MainThread]: Snowflake adapter: Setting snowflake.connector to ERROR (file logging only)
+[0m01:22:16.194001 [debug] [MainThread]: Snowflake adapter: Setting botocore to ERROR (file logging only)
+[0m01:22:16.194858 [debug] [MainThread]: Snowflake adapter: Setting boto3 to ERROR (file logging only)
+[0m01:22:16.586552 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': '658ff761-bee8-496c-8797-bef49966f0d7', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f6be90e1760>]}
+[0m01:22:16.705102 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'adapter_info', 'label': '658ff761-bee8-496c-8797-bef49966f0d7', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f6becab8a10>]}
+[0m01:22:16.707155 [info ] [MainThread]: Registered adapter: snowflake=1.12.0
+[0m01:22:17.002465 [debug] [MainThread]: checksum: 26d8e1a267de9c1948312ed4a46d71999c92b888dd08a4b3873de28fecce6e28, vars: {}, profile: event_driven_pipeline, target: dev, version: 1.12.0
+[0m01:22:17.282304 [debug] [MainThread]: Partial parsing enabled: 0 files deleted, 0 files added, 0 files changed.
+[0m01:22:17.283290 [debug] [MainThread]: Nothing changed, skipping partial parsing.
+[0m01:22:17.284079 [debug] [MainThread]: Partial parsing enabled, no changes found, skipping parsing
+[0m01:22:17.299629 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'load_project', 'label': '658ff761-bee8-496c-8797-bef49966f0d7', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f6be8be5d90>]}
+[0m01:22:17.596039 [debug] [MainThread]: Wrote artifact WritableManifest to /opt/airflow/dbt/target/manifest.json
+[0m01:22:17.603240 [debug] [MainThread]: Wrote artifact SemanticManifest to /opt/airflow/dbt/target/semantic_manifest.json
+[0m01:22:17.631266 [debug] [MainThread]: Wrote artifact OsiDocument to /opt/airflow/dbt/target/osi_document.json
+[0m01:22:17.647916 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'resource_counts', 'label': '658ff761-bee8-496c-8797-bef49966f0d7', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f6be88b1490>]}
+[0m01:22:17.649141 [info ] [MainThread]: Found 2 models, 4 data tests, 1 source, 545 macros
+[0m01:22:17.650263 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': '658ff761-bee8-496c-8797-bef49966f0d7', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f6be8672f30>]}
+[0m01:22:17.653590 [info ] [MainThread]: 
+[0m01:22:17.654652 [info ] [MainThread]: Concurrency: 8 threads (target='dev')
+[0m01:22:17.655950 [info ] [MainThread]: 
+[0m01:22:17.658015 [debug] [MainThread]: Acquiring new snowflake connection 'master'
+[0m01:22:17.666469 [debug] [ThreadPool]: Acquiring new snowflake connection 'list_EVENTDRIVEN_PIPELINE_DB'
+[0m01:22:17.676235 [debug] [ThreadPool]: Acquiring new snowflake connection 'list_EVENTDRIVEN_PIPELINE_DB'
+[0m01:22:17.712084 [debug] [ThreadPool]: Using snowflake connection "list_EVENTDRIVEN_PIPELINE_DB"
+[0m01:22:17.713140 [debug] [ThreadPool]: Using snowflake connection "list_EVENTDRIVEN_PIPELINE_DB"
+[0m01:22:17.713836 [debug] [ThreadPool]: On list_EVENTDRIVEN_PIPELINE_DB: show terse schemas in database EVENTDRIVEN_PIPELINE_DB
+    limit 10000
+/* {"app": "dbt", "dbt_version": "1.12.0", "profile_name": "event_driven_pipeline", "target_name": "dev", "connection_name": "list_EVENTDRIVEN_PIPELINE_DB"} */
+[0m01:22:17.714780 [debug] [ThreadPool]: On list_EVENTDRIVEN_PIPELINE_DB: show terse schemas in database EVENTDRIVEN_PIPELINE_DB
+    limit 10000
+/* {"app": "dbt", "dbt_version": "1.12.0", "profile_name": "event_driven_pipeline", "target_name": "dev", "connection_name": "list_EVENTDRIVEN_PIPELINE_DB"} */
+[0m01:22:17.727376 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m01:22:17.715837 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m01:22:18.764687 [debug] [ThreadPool]: SQL status: SUCCESS 6 in 1.037 seconds
+[0m01:22:19.106993 [debug] [ThreadPool]: SQL status: SUCCESS 6 in 1.391 seconds
+[0m01:22:19.111770 [debug] [ThreadPool]: Re-using an available connection from the pool (formerly list_EVENTDRIVEN_PIPELINE_DB, now list_EVENTDRIVEN_PIPELINE_DB_raw_staging)
+[0m01:22:19.112964 [debug] [ThreadPool]: Re-using an available connection from the pool (formerly list_EVENTDRIVEN_PIPELINE_DB, now list_EVENTDRIVEN_PIPELINE_DB_raw_analytics)
+[0m01:22:19.144289 [debug] [ThreadPool]: Using snowflake connection "list_EVENTDRIVEN_PIPELINE_DB_raw_staging"
+[0m01:22:19.148324 [debug] [ThreadPool]: Using snowflake connection "list_EVENTDRIVEN_PIPELINE_DB_raw_analytics"
+[0m01:22:19.149077 [debug] [ThreadPool]: On list_EVENTDRIVEN_PIPELINE_DB_raw_staging: show objects in EVENTDRIVEN_PIPELINE_DB.raw_staging
+    limit 10000
+    
+
+/* {"app": "dbt", "dbt_version": "1.12.0", "profile_name": "event_driven_pipeline", "target_name": "dev", "connection_name": "list_EVENTDRIVEN_PIPELINE_DB_raw_staging"} */;
+[0m01:22:19.150218 [debug] [ThreadPool]: On list_EVENTDRIVEN_PIPELINE_DB_raw_analytics: show objects in EVENTDRIVEN_PIPELINE_DB.raw_analytics
+    limit 10000
+    
+
+/* {"app": "dbt", "dbt_version": "1.12.0", "profile_name": "event_driven_pipeline", "target_name": "dev", "connection_name": "list_EVENTDRIVEN_PIPELINE_DB_raw_analytics"} */;
+[0m01:22:19.258162 [debug] [ThreadPool]: SQL status: SUCCESS 1 in 0.107 seconds
+[0m01:22:19.269262 [debug] [ThreadPool]: Using snowflake connection "list_EVENTDRIVEN_PIPELINE_DB_raw_staging"
+[0m01:22:19.271204 [debug] [ThreadPool]: On list_EVENTDRIVEN_PIPELINE_DB_raw_staging: show user functions in EVENTDRIVEN_PIPELINE_DB.raw_staging
+/* {"app": "dbt", "dbt_version": "1.12.0", "profile_name": "event_driven_pipeline", "target_name": "dev", "connection_name": "list_EVENTDRIVEN_PIPELINE_DB_raw_staging"} */
+[0m01:22:19.472977 [debug] [ThreadPool]: SQL status: SUCCESS 0 in 0.201 seconds
+[0m01:22:19.497385 [debug] [ThreadPool]: SQL status: SUCCESS 1 in 0.344 seconds
+[0m01:22:19.501873 [debug] [ThreadPool]: Using snowflake connection "list_EVENTDRIVEN_PIPELINE_DB_raw_analytics"
+[0m01:22:19.502708 [debug] [ThreadPool]: On list_EVENTDRIVEN_PIPELINE_DB_raw_analytics: show user functions in EVENTDRIVEN_PIPELINE_DB.raw_analytics
+/* {"app": "dbt", "dbt_version": "1.12.0", "profile_name": "event_driven_pipeline", "target_name": "dev", "connection_name": "list_EVENTDRIVEN_PIPELINE_DB_raw_analytics"} */
+[0m01:22:19.601845 [debug] [ThreadPool]: SQL status: SUCCESS 0 in 0.098 seconds
+[0m01:22:19.605806 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': '658ff761-bee8-496c-8797-bef49966f0d7', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f6be89666f0>]}
+[0m01:22:19.614946 [debug] [Thread-2 (]: Began running node model.event_driven_pipeline.stg_events
+[0m01:22:19.616488 [info ] [Thread-2 (]: 1 of 2 START sql view model raw_staging.stg_events ............................. [RUN]
+[0m01:22:19.617842 [debug] [Thread-2 (]: Re-using an available connection from the pool (formerly list_EVENTDRIVEN_PIPELINE_DB_raw_analytics, now model.event_driven_pipeline.stg_events)
+[0m01:22:19.618994 [debug] [Thread-2 (]: Began compiling node model.event_driven_pipeline.stg_events
+[0m01:22:19.631144 [debug] [Thread-2 (]: Writing injected SQL for node "model.event_driven_pipeline.stg_events"
+[0m01:22:19.634332 [debug] [Thread-2 (]: Began executing node model.event_driven_pipeline.stg_events
+[0m01:22:19.696896 [debug] [Thread-2 (]: Writing runtime sql for node "model.event_driven_pipeline.stg_events"
+[0m01:22:19.702291 [debug] [Thread-2 (]: Using snowflake connection "model.event_driven_pipeline.stg_events"
+[0m01:22:19.703718 [debug] [Thread-2 (]: On model.event_driven_pipeline.stg_events: create or replace   view EVENTDRIVEN_PIPELINE_DB.raw_staging.stg_events
+  
+  
+  
+  
+  as (
+    with source as (
+    select * from EVENTDRIVEN_PIPELINE_DB.RAW.raw_events
+),
+
+flattened as (
+    select
+        event_id,
+        event_type,
+        source_file_name,
+        ingested_at,
+        event_payload:user_id::string        as user_id,
+        event_payload:amount::float          as amount,
+        event_payload:currency::string       as currency,
+        event_payload:created_at::timestamp  as event_created_at
+    from source
+)
+
+select * from flattened
+  )
+/* {"app": "dbt", "dbt_version": "1.12.0", "profile_name": "event_driven_pipeline", "target_name": "dev", "node_id": "model.event_driven_pipeline.stg_events"} */;
+[0m01:22:19.973976 [debug] [Thread-2 (]: SQL status: SUCCESS 1 in 0.269 seconds
+[0m01:22:20.024499 [debug] [Thread-2 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '658ff761-bee8-496c-8797-bef49966f0d7', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f6beb7827e0>]}
+[0m01:22:20.026087 [info ] [Thread-2 (]: 1 of 2 OK created sql view model raw_staging.stg_events ........................ [[32mSUCCESS 1[0m in 0.41s]
+[0m01:22:20.028198 [debug] [Thread-2 (]: Finished running node model.event_driven_pipeline.stg_events
+[0m01:22:20.030824 [debug] [Thread-4 (]: Began running node model.event_driven_pipeline.analytics_events_daily
+[0m01:22:20.031924 [info ] [Thread-4 (]: 2 of 2 START sql table model raw_analytics.analytics_events_daily .............. [RUN]
+[0m01:22:20.033778 [debug] [Thread-4 (]: Acquiring new snowflake connection 'model.event_driven_pipeline.analytics_events_daily'
+[0m01:22:20.034828 [debug] [Thread-4 (]: Began compiling node model.event_driven_pipeline.analytics_events_daily
+[0m01:22:20.040316 [debug] [Thread-4 (]: Writing injected SQL for node "model.event_driven_pipeline.analytics_events_daily"
+[0m01:22:20.043660 [debug] [Thread-4 (]: Began executing node model.event_driven_pipeline.analytics_events_daily
+[0m01:22:20.095688 [debug] [Thread-4 (]: Writing runtime sql for node "model.event_driven_pipeline.analytics_events_daily"
+[0m01:22:20.099589 [debug] [Thread-4 (]: Using snowflake connection "model.event_driven_pipeline.analytics_events_daily"
+[0m01:22:20.100582 [debug] [Thread-4 (]: On model.event_driven_pipeline.analytics_events_daily: create or replace transient table EVENTDRIVEN_PIPELINE_DB.raw_analytics.analytics_events_daily
+    
+    
+    
+    
+    
+
+    as (with events as (
+    select * from EVENTDRIVEN_PIPELINE_DB.raw_staging.stg_events
+)
+
+select
+    date_trunc('day', event_created_at) as event_date,
+    event_type,
+    currency,
+    count(*)          as event_count,
+    sum(amount)        as total_amount,
+    avg(amount)         as avg_amount
+from events
+group by 1, 2, 3
+    )
+
+/* {"app": "dbt", "dbt_version": "1.12.0", "profile_name": "event_driven_pipeline", "target_name": "dev", "node_id": "model.event_driven_pipeline.analytics_events_daily"} */;
+[0m01:22:20.101409 [debug] [Thread-4 (]: Opening a new connection, currently in state init
+[0m01:22:21.561393 [debug] [Thread-4 (]: SQL status: SUCCESS 14 in 1.460 seconds
+[0m01:22:21.566333 [debug] [Thread-4 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '658ff761-bee8-496c-8797-bef49966f0d7', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f6be88b3230>]}
+[0m01:22:21.567866 [info ] [Thread-4 (]: 2 of 2 OK created sql table model raw_analytics.analytics_events_daily ......... [[32mSUCCESS 14[0m in 1.53s]
+[0m01:22:21.569721 [debug] [Thread-4 (]: Finished running node model.event_driven_pipeline.analytics_events_daily
+[0m01:22:21.574894 [debug] [MainThread]: Connection 'master' was properly closed.
+[0m01:22:21.575688 [debug] [MainThread]: Connection 'list_EVENTDRIVEN_PIPELINE_DB_raw_staging' was left open.
+[0m01:22:21.576536 [debug] [MainThread]: On list_EVENTDRIVEN_PIPELINE_DB_raw_staging: Close
+[0m01:22:21.677493 [debug] [MainThread]: Connection 'model.event_driven_pipeline.stg_events' was left open.
+[0m01:22:21.678477 [debug] [MainThread]: On model.event_driven_pipeline.stg_events: Close
+[0m01:22:21.765222 [debug] [MainThread]: Connection 'model.event_driven_pipeline.analytics_events_daily' was left open.
+[0m01:22:21.766180 [debug] [MainThread]: On model.event_driven_pipeline.analytics_events_daily: Close
+[0m01:22:22.816574 [info ] [MainThread]: 
+[0m01:22:22.817806 [info ] [MainThread]: Finished running 1 table model, 1 view model in 0 hours 0 minutes and 5.16 seconds (5.16s).
+[0m01:22:22.820929 [debug] [MainThread]: Command end result
+[0m01:22:22.921221 [debug] [MainThread]: Wrote artifact WritableManifest to /opt/airflow/dbt/target/manifest.json
+[0m01:22:22.927155 [debug] [MainThread]: Wrote artifact SemanticManifest to /opt/airflow/dbt/target/semantic_manifest.json
+[0m01:22:22.935025 [debug] [MainThread]: Wrote artifact OsiDocument to /opt/airflow/dbt/target/osi_document.json
+[0m01:22:22.951734 [debug] [MainThread]: Wrote artifact RunExecutionResult to /opt/airflow/dbt/target/run_results.json
+[0m01:22:22.952846 [info ] [MainThread]: 
+[0m01:22:22.954100 [info ] [MainThread]: [32mCompleted successfully[0m
+[0m01:22:22.955081 [info ] [MainThread]: 
+[0m01:22:22.956326 [info ] [MainThread]: Done. PASS=2 WARN=0 ERROR=0 SKIP=0 NO-OP=0 REUSED=0 TOTAL=2
+[0m01:22:22.958717 [debug] [MainThread]: Resource report: {"command_name": "run", "command_success": true, "command_wall_clock_time": 7.6167417, "process_in_blocks": "0", "process_kernel_time": 0.644433, "process_mem_max_rss": "170076", "process_out_blocks": "2721", "process_user_time": 6.240081}
+[0m01:22:22.959788 [debug] [MainThread]: Command `dbt run` succeeded at 01:22:22.959630 after 7.62 seconds
+[0m01:22:22.960725 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f6bed3450d0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f6becf00320>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f6bec4df7d0>]}
+[0m01:22:22.961904 [debug] [MainThread]: Flushing usage events
+[0m01:22:23.977287 [debug] [MainThread]: An error was encountered while trying to flush usage events

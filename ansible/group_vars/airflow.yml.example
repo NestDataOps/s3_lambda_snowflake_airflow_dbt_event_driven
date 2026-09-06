@@ -1,0 +1,26 @@
+# Copy this to group_vars/airflow.yml (gitignored) and fill in real values,
+# then encrypt it: ansible-vault encrypt ansible/group_vars/airflow.yml
+#
+# Run the playbook with: ansible-playbook playbook.yml --ask-vault-pass
+
+aws_region: "ap-southeast-2"
+
+airflow_admin_user: "admin"
+airflow_admin_password: "changeme"  # vault this -- it's a real login
+
+snowflake_organization_name: "your-org"
+snowflake_account_name: "your-account"
+snowflake_user: "airflow_user"
+snowflake_private_key: |
+  -----BEGIN PRIVATE KEY-----
+  ...paste your key-pair private key here...
+  -----END PRIVATE KEY-----
+
+# JSON string Airflow expects in the connection's "extra" field for
+# key-pair auth via the Snowflake provider.
+snowflake_conn_extra: >-
+  {"account": "{{ snowflake_organization_name }}-{{ snowflake_account_name }}",
+   "warehouse": "EVENTDRIVEN_PIPELINE_WH",
+   "database": "EVENTDRIVEN_PIPELINE_DB",
+   "role": "TRANSFORMER",
+   "private_key_content": "{{ snowflake_private_key }}"}

@@ -1,0 +1,282 @@
+---
+# Installs Airflow directly on the EC2 host (no Docker): a venv, three
+# systemd services (webserver, scheduler, triggerer -- the triggerer is
+# required because the DAG uses a deferrable S3KeySensor), SQLite as the
+# metadata DB, and SequentialExecutor. That's a deliberately light stack
+# for a t3a.small running one linear DAG occasionally -- see README for
+# when you'd want to upgrade to Postgres + LocalExecutor instead.
+
+- name: Configure Airflow host
+  hosts: airflow
+  become: true
+  vars:
+    airflow_version: "2.9.3"
+    python_version: "3.12"
+    airflow_home: "/opt/airflow"
+    airflow_user: "airflow"
+
+  tasks:
+    - name: Force archive.ubuntu.com mirrors
+      become: true
+      shell: |
+        sed -i 's|http://[^ ]*archive\.ubuntu\.com/ubuntu|http://archive.ubuntu.com/ubuntu|g' /etc/apt/sources.list /etc/apt/sources.list.d/ubuntu.sources 2>/dev/null || true
+        sed -i 's|https://[^ ]*archive\.ubuntu\.com/ubuntu|http://archive.ubuntu.com/ubuntu|g' /etc/apt/sources.list /etc/apt/sources.list.d/ubuntu.sources 2>/dev/null || true
+      changed_when: false
+
+    - name: Update apt cache
+      apt:
+        update_cache: true
+        cache_valid_time: 3600
+
+    - name: Install software-properties-common (provides add-apt-repository)
+      apt:
+        name: software-properties-common
+        state: present
+
+    - name: Add deadsnakes PPA (Ubuntu 22.04's default repos only have Python 3.10)
+      apt_repository:
+        repo: ppa:deadsnakes/ppa
+        state: present
+        update_cache: true
+
+    - name: Install system dependencies
+      apt:
+        name:
+          - python3.12
+          - python3.12-venv
+          - python3-pip
+          - git
+          - libpq-dev
+          - build-essential
+        state: present
+
+    - name: Create airflow system user
+      user:
+        name: "{{ airflow_user }}"
+        system: true
+        shell: /bin/bash
+        home: "{{ airflow_home }}"
+        create_home: true
+
+    # The user module's default home dir mode is often 0700, which blocks
+    # the SSH user from even walking into it to reach subdirectories --
+    # ownership stays with airflow_user, this just opens the
+    # execute/search bit for others.
+    - name: Make AIRFLOW_HOME itself traversable
+      file:
+        path: "{{ airflow_home }}"
+        state: directory
+        mode: "0755"
+
+    - name: Create dags/dbt subdirectories (owned by SSH user -- rsync targets these, see below)
+      file:
+        path: "{{ airflow_home }}/{{ item }}"
+        state: directory
+        # Owned by the SSH user (not airflow_user) -- the sync tasks below
+        # run without become (rsync's local/sender half can't sudo on your
+        # Mac), so they need write access as whichever user they're
+        # actually connecting as. "Fix ownership after sync" further down
+        # chowns these back to airflow_user once the files are in place.
+        owner: "{{ ansible_user }}"
+        group: "{{ ansible_user }}"
+        mode: "0755"
+      loop:
+        - dags
+        - dbt
+
+    - name: Create logs subdirectory (owned by airflow_user directly -- rsync never touches this one)
+      file:
+        path: "{{ airflow_home }}/logs"
+        state: directory
+        owner: "{{ airflow_user }}"
+        group: "{{ airflow_user }}"
+        mode: "0755"
+
+    - name: Create venv
+      command: python3.12 -m venv {{ airflow_home }}/venv
+      args:
+        creates: "{{ airflow_home }}/venv/bin/activate"
+      become_user: "{{ airflow_user }}"
+
+    # pip's --constraint flag wants a local file path, not a URL -- it
+    # calls os.path.abspath() on whatever you pass it rather than fetching
+    # it, so a URL just fails with a confusing FileNotFoundError. Download
+    # it first, then point pip at the local copy.
+    - name: Download Airflow constraints file
+      get_url:
+        url: "https://raw.githubusercontent.com/apache/airflow/constraints-{{ airflow_version }}/constraints-{{ python_version }}.txt"
+        dest: "/tmp/airflow-constraints-{{ airflow_version }}-py{{ python_version }}.txt"
+        mode: "0644"
+
+    - name: Install Airflow with constraints file (avoids dependency resolution hell)
+      pip:
+        name: "apache-airflow[amazon]=={{ airflow_version }}"
+        virtualenv: "{{ airflow_home }}/venv"
+        extra_args: "--constraint /tmp/airflow-constraints-{{ airflow_version }}-py{{ python_version }}.txt"
+        # pip internally calls os.path.abspath() on the requirement string,
+        # which needs to resolve the *current* working directory -- if the
+        # invoking user (airflow, via become_user) can't traverse whatever
+        # directory the task happens to inherit, that raises a cryptic
+        # FileNotFoundError that has nothing to do with the actual package.
+        # /tmp is reliably traversable by every user, so pin cwd there.
+        chdir: /tmp
+      become_user: "{{ airflow_user }}"
+
+    - name: Install Snowflake provider for Airflow
+      pip:
+        name:
+          - apache-airflow-providers-snowflake
+        virtualenv: "{{ airflow_home }}/venv"
+        # Without this, pip's resolver is free to satisfy
+        # apache-airflow-providers-snowflake's loose lower-bound
+        # dependency on apache-airflow by silently upgrading the already
+        # correctly-pinned 2.9.3 install to whatever's newest -- this bit
+        # us in testing (Airflow ended up at 3.3.1 despite task 1 pinning
+        # 2.9.3 cleanly on its own).
+        extra_args: "--constraint /tmp/airflow-constraints-{{ airflow_version }}-py{{ python_version }}.txt"
+        chdir: /tmp
+      become_user: "{{ airflow_user }}"
+
+    # dbt gets its OWN venv, deliberately not sharing Airflow's constraints
+    # file. Airflow's constraints pin exact versions for a huge number of
+    # shared libraries (Jinja2, pydantic, urllib3, click, etc.), and
+    # dbt-snowflake has its own independent requirements for many of the
+    # same libraries -- forcing dbt to install under Airflow's constraints
+    # produces an unsatisfiable conflict (this is what the wall of red
+    # errors was). The DAG calls this venv's `dbt` binary by full path
+    # rather than relying on it being importable inside Airflow's own env.
+    - name: Create separate dbt venv
+      command: python3.12 -m venv {{ airflow_home }}/dbt_venv
+      args:
+        creates: "{{ airflow_home }}/dbt_venv/bin/activate"
+      become_user: "{{ airflow_user }}"
+
+    - name: Install dbt-snowflake into its own venv (no Airflow constraints applied)
+      pip:
+        name: dbt-snowflake
+        virtualenv: "{{ airflow_home }}/dbt_venv"
+        chdir: /tmp
+      become_user: "{{ airflow_user }}"
+
+    - name: Sync DAGs to remote
+      synchronize:
+        src: ../airflow/dags/
+        dest: "{{ airflow_home }}/dags/"
+        delete: true
+      become: false # synchronize's rsync sender runs locally on the controller,
+                     # not remotely -- play-level become would try (and likely
+                     # fail) to sudo on your own Mac for the local half of this
+
+    - name: Sync dbt project to remote
+      synchronize:
+        src: ../airflow/dbt/
+        dest: "{{ airflow_home }}/dbt/"
+        delete: true
+      become: false
+
+    - name: Fix ownership after sync (rsync writes as the SSH user, not airflow)
+      file:
+        path: "{{ airflow_home }}/{{ item }}"
+        owner: "{{ airflow_user }}"
+        group: "{{ airflow_user }}"
+        recurse: true
+      loop:
+        - dags
+        - dbt
+
+    - name: Template dbt profiles.yml
+      template:
+        src: templates/profiles.yml.j2
+        dest: "{{ airflow_home }}/dbt/profiles.yml"
+        owner: "{{ airflow_user }}"
+        group: "{{ airflow_user }}"
+        mode: "0600" # contains credentials -- readable only by the airflow user
+      no_log: true # avoid printing rendered credentials in ansible output
+
+    - name: Template environment file (shared by all three systemd services)
+      template:
+        src: templates/airflow.env.j2
+        dest: "{{ airflow_home }}/airflow.env"
+        owner: "{{ airflow_user }}"
+        group: "{{ airflow_user }}"
+        mode: "0600"
+      no_log: true
+
+    - name: Initialize Airflow metadata DB
+      command: "{{ airflow_home }}/venv/bin/airflow db migrate"
+      environment:
+        AIRFLOW_HOME: "{{ airflow_home }}"
+      become_user: "{{ airflow_user }}"
+      args:
+        creates: "{{ airflow_home }}/airflow.db"
+
+    - name: Create Airflow admin user (idempotent -- errors harmlessly if it already exists)
+      command: >
+        {{ airflow_home }}/venv/bin/airflow users create
+        --username {{ airflow_admin_user }}
+        --password {{ airflow_admin_password }}
+        --firstname Admin --lastname User
+        --role Admin --email admin@example.com
+      environment:
+        AIRFLOW_HOME: "{{ airflow_home }}"
+      become_user: "{{ airflow_user }}"
+      register: create_user_result
+      failed_when:
+        - create_user_result.rc != 0
+        - "'already exist' not in create_user_result.stderr"
+      no_log: true
+
+    - name: Add aws_default connection (uses the EC2 instance profile, no keys needed)
+      command: >
+        {{ airflow_home }}/venv/bin/airflow connections add aws_default
+        --conn-type aws
+        --conn-extra '{"region_name": "{{ aws_region }}"}'
+      environment:
+        AIRFLOW_HOME: "{{ airflow_home }}"
+      become_user: "{{ airflow_user }}"
+      register: add_conn_result
+      failed_when:
+        - add_conn_result.rc != 0
+        - "'already exists' not in add_conn_result.stderr"
+
+    - name: Add snowflake_default connection
+      command: >
+        {{ airflow_home }}/venv/bin/airflow connections add snowflake_default
+        --conn-type snowflake
+        --conn-login {{ snowflake_user }}
+        --conn-extra {{ snowflake_conn_extra | quote }}
+      environment:
+        AIRFLOW_HOME: "{{ airflow_home }}"
+      become_user: "{{ airflow_user }}"
+      register: add_sf_conn_result
+      failed_when:
+        - add_sf_conn_result.rc != 0
+        - "'already exists' not in add_sf_conn_result.stderr"
+      no_log: true
+
+    - name: Install systemd service files
+      template:
+        src: "templates/{{ item }}.service.j2"
+        dest: "/etc/systemd/system/{{ item }}.service"
+      loop:
+        - airflow-webserver
+        - airflow-scheduler
+        - airflow-triggerer
+      notify: reload systemd
+
+    - meta: flush_handlers
+
+    - name: Enable and start Airflow services
+      systemd:
+        name: "{{ item }}"
+        enabled: true
+        state: restarted
+      loop:
+        - airflow-webserver
+        - airflow-scheduler
+        - airflow-triggerer
+
+  handlers:
+    - name: reload systemd
+      systemd:
+        daemon_reload: true
