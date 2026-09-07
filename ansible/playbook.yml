@@ -16,13 +16,6 @@
     airflow_user: "airflow"
 
   tasks:
-    - name: Force archive.ubuntu.com mirrors
-      become: true
-      shell: |
-        sed -i 's|http://[^ ]*archive\.ubuntu\.com/ubuntu|http://archive.ubuntu.com/ubuntu|g' /etc/apt/sources.list /etc/apt/sources.list.d/ubuntu.sources 2>/dev/null || true
-        sed -i 's|https://[^ ]*archive\.ubuntu\.com/ubuntu|http://archive.ubuntu.com/ubuntu|g' /etc/apt/sources.list /etc/apt/sources.list.d/ubuntu.sources 2>/dev/null || true
-      changed_when: false
-
     - name: Update apt cache
       apt:
         update_cache: true
@@ -163,6 +156,14 @@
         src: ../airflow/dags/
         dest: "{{ airflow_home }}/dags/"
         delete: true
+        # Airflow's DAG processor generates __pycache__/*.pyc on the
+        # remote box, owned by airflow_user -- rsync (running as the
+        # unprivileged SSH user, see become: false below) can't write
+        # into or delete files it doesn't own. These are build artifacts
+        # regenerated automatically, not source, so just exclude them.
+        rsync_opts:
+          - "--exclude=__pycache__/"
+          - "--exclude=*.pyc"
       become: false # synchronize's rsync sender runs locally on the controller,
                      # not remotely -- play-level become would try (and likely
                      # fail) to sudo on your own Mac for the local half of this
@@ -172,6 +173,18 @@
         src: ../airflow/dbt/
         dest: "{{ airflow_home }}/dbt/"
         delete: true
+        # profiles.yml and the private key are rendered remotely by later
+        # tasks (owned by airflow_user, mode 0600) and don't exist in the
+        # local source -- without excluding them, delete:true would try
+        # to remove them on every re-run and hit the same
+        # permission-denied problem as __pycache__ above. target/,
+        # logs/, dbt_packages/ are dbt's own generated build artifacts.
+        rsync_opts:
+          - "--exclude=profiles.yml"
+          - "--exclude=snowflake_key.p8"
+          - "--exclude=target/"
+          - "--exclude=logs/"
+          - "--exclude=dbt_packages/"
       become: false
 
     - name: Fix ownership after sync (rsync writes as the SSH user, not airflow)
@@ -183,6 +196,21 @@
       loop:
         - dags
         - dbt
+
+    # Copies the actual key FILE from your Mac, rather than embedding its
+    # content as a Jinja-rendered YAML string in group_vars -- the latter
+    # repeatedly broke on indentation (a PEM's real newlines inside a YAML
+    # block scalar are extremely easy to get wrong via copy-paste, and we
+    # hit that failure three separate times). A direct file copy sidesteps
+    # the whole problem: no YAML embedding, no indentation to get right.
+    - name: Copy Snowflake private key to remote
+      copy:
+        src: "{{ snowflake_private_key_local_path }}"
+        dest: "{{ airflow_home }}/dbt/snowflake_key.p8"
+        owner: "{{ airflow_user }}"
+        group: "{{ airflow_user }}"
+        mode: "0600"
+      no_log: true
 
     - name: Template dbt profiles.yml
       template:
@@ -240,11 +268,26 @@
         - "'already exists' not in add_conn_result.stderr"
 
     - name: Add snowflake_default connection
-      command: >
-        {{ airflow_home }}/venv/bin/airflow connections add snowflake_default
-        --conn-type snowflake
-        --conn-login {{ snowflake_user }}
-        --conn-extra {{ snowflake_conn_extra | quote }}
+      command:
+        argv:
+          - "{{ airflow_home }}/venv/bin/airflow"
+          - connections
+          - add
+          - snowflake_default
+          - --conn-type
+          - snowflake
+          - --conn-login
+          - "{{ snowflake_user }}"
+          - --conn-extra
+          # argv (a real list) passes this JSON straight to execve with no
+          # shell/whitespace splitting involved -- unlike the previous
+          # string-form command, which silently mangled the JSON payload
+          # (only --conn-login, a space-free value, ever landed intact).
+          # private_key_file points at the same key file written above,
+          # rather than embedding the raw key content: a PEM's real
+          # newlines aren't valid inside a JSON string without escaping,
+          # which is what broke this the first time.
+          - '{"account": "{{ snowflake_organization_name }}-{{ snowflake_account_name }}", "warehouse": "EVENTDRIVEN_PIPELINE_WH", "database": "EVENTDRIVEN_PIPELINE_DB", "role": "TRANSFORMER", "private_key_file": "{{ airflow_home }}/dbt/snowflake_key.p8"}'
       environment:
         AIRFLOW_HOME: "{{ airflow_home }}"
       become_user: "{{ airflow_user }}"

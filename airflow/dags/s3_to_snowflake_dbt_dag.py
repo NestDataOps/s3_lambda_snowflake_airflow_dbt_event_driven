@@ -89,7 +89,7 @@ def s3_to_snowflake_dbt():
         task_id="dbt_run",
         bash_command=(
             f"cd {DBT_PROJECT_DIR} && "
-            f"dbt run --profiles-dir {DBT_PROFILES_DIR} --select staging marts"
+            f"/opt/airflow/dbt_venv/bin/dbt run --profiles-dir {DBT_PROFILES_DIR} --select staging marts"
         ),
     )
 
@@ -97,7 +97,7 @@ def s3_to_snowflake_dbt():
         task_id="dbt_test",
         bash_command=(
             f"cd {DBT_PROJECT_DIR} && "
-            f"dbt test --profiles-dir {DBT_PROFILES_DIR}"
+            f"/opt/airflow/dbt_venv/bin/dbt test --profiles-dir {DBT_PROFILES_DIR}"
         ),
     )
 
