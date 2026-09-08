@@ -47,8 +47,9 @@ provider "snowflake" {
   account_name       = var.snowflake_account_name
   role               = "SYSADMIN"
 
-  # snowflake_file_format, snowflake_table, and snowflake_storage_integration
-  # resources are still gated behind preview flags in provider v2.x.
+  # snowflake_file_format, snowflake_table, snowflake_storage_integration,
+  # and snowflake_stage resources are still gated behind preview flags in
+  # provider v2.x.
   preview_features_enabled = [
     "snowflake_file_format_resource",
     "snowflake_table_resource",
@@ -120,4 +121,5 @@ module "snowflake" {
   project_name          = var.project_name
   processed_bucket_name = module.s3.processed_bucket_name
   storage_aws_role_arn  = module.iam.snowflake_storage_role_arn
+  transformer_user      = var.snowflake_transformer_user
 }

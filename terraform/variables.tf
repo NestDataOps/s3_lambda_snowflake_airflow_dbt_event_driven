@@ -47,3 +47,8 @@ variable "allowed_cidr" {
   description = "Your public IP in CIDR form (e.g. 1.2.3.4/32). Find yours with: curl -s ifconfig.me"
   type        = string
 }
+
+variable "snowflake_transformer_user" {
+  description = "Snowflake username that Airflow/dbt log in as (matches snowflake_user in ansible/group_vars/airflow.yml) -- gets the TRANSFORMER role granted to it"
+  type        = string
+}

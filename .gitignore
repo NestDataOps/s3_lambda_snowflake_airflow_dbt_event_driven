@@ -6,6 +6,9 @@
 !*.tfvars.example
 crash.log
 
+
+ansible/inventory.ini
+
 *DS_Store
 # Lambda build artifacts
 lambda/build/
