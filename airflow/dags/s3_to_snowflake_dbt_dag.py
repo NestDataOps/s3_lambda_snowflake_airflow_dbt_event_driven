@@ -39,9 +39,11 @@ default_args = {
 @dag(
     dag_id="s3_to_snowflake_dbt",
     description="Senses processed Parquet -> loads Snowflake raw -> runs dbt",
-    schedule=None,  # triggered externally; see README
+    #schedule=None,  # triggered externally; see README
+    schedule="*/5 * * * *",
     start_date=datetime(2026, 1, 1),
     catchup=False,
+    max_active_runs=1,
     default_args=default_args,
     tags=["event-driven", "snowflake", "dbt"],
     params={"s3_key": ""},  # passed in by the trigger (specific file), optional

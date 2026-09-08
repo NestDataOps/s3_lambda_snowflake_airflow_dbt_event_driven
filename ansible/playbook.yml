@@ -73,6 +73,14 @@
         owner: "{{ ansible_user }}"
         group: "{{ ansible_user }}"
         mode: "0755"
+        # recurse is essential here, not optional: on every run AFTER the
+        # first, subdirectories like dbt/models/staging/ already exist,
+        # left owned by airflow_user by the previous run's "Fix ownership
+        # after sync" step below. Without recurse, only the top-level
+        # dags/ and dbt/ folders get reset -- nested folders stay owned by
+        # airflow_user and rsync (running unprivileged) can't write into
+        # them, which is exactly the error this fixes.
+        recurse: true
       loop:
         - dags
         - dbt
@@ -164,6 +172,7 @@
         rsync_opts:
           - "--exclude=__pycache__/"
           - "--exclude=*.pyc"
+          - "--exclude=.DS_Store"
       become: false # synchronize's rsync sender runs locally on the controller,
                      # not remotely -- play-level become would try (and likely
                      # fail) to sudo on your own Mac for the local half of this
@@ -185,6 +194,7 @@
           - "--exclude=target/"
           - "--exclude=logs/"
           - "--exclude=dbt_packages/"
+          - "--exclude=.DS_Store"
       become: false
 
     - name: Fix ownership after sync (rsync writes as the SSH user, not airflow)
@@ -254,6 +264,15 @@
         - "'already exist' not in create_user_result.stderr"
       no_log: true
 
+    - name: Remove existing aws_default connection (so re-runs pick up changes)
+      command: "{{ airflow_home }}/venv/bin/airflow connections delete aws_default"
+      environment:
+        AIRFLOW_HOME: "{{ airflow_home }}"
+      become_user: "{{ airflow_user }}"
+      register: del_aws_conn_result
+      failed_when: false # fine if it didn't exist yet -- that's the normal first-run case
+      changed_when: del_aws_conn_result.rc == 0
+
     - name: Add aws_default connection (uses the EC2 instance profile, no keys needed)
       command: >
         {{ airflow_home }}/venv/bin/airflow connections add aws_default
@@ -262,10 +281,15 @@
       environment:
         AIRFLOW_HOME: "{{ airflow_home }}"
       become_user: "{{ airflow_user }}"
-      register: add_conn_result
-      failed_when:
-        - add_conn_result.rc != 0
-        - "'already exists' not in add_conn_result.stderr"
+
+    - name: Remove existing snowflake_default connection (so re-runs pick up changes)
+      command: "{{ airflow_home }}/venv/bin/airflow connections delete snowflake_default"
+      environment:
+        AIRFLOW_HOME: "{{ airflow_home }}"
+      become_user: "{{ airflow_user }}"
+      register: del_sf_conn_result
+      failed_when: false
+      changed_when: del_sf_conn_result.rc == 0
 
     - name: Add snowflake_default connection
       command:
@@ -291,10 +315,6 @@
       environment:
         AIRFLOW_HOME: "{{ airflow_home }}"
       become_user: "{{ airflow_user }}"
-      register: add_sf_conn_result
-      failed_when:
-        - add_sf_conn_result.rc != 0
-        - "'already exists' not in add_sf_conn_result.stderr"
       no_log: true
 
     - name: Install systemd service files
