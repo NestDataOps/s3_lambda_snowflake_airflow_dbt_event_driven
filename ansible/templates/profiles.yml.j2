@@ -1,0 +1,13 @@
+event_driven_pipeline:
+  target: dev
+  outputs:
+    dev:
+      type: snowflake
+      account: "{{ snowflake_organization_name }}-{{ snowflake_account_name }}"
+      user: "{{ snowflake_user }}"
+      private_key_path: "{{ airflow_home }}/dbt/snowflake_key.p8"
+      role: TRANSFORMER
+      database: EVENTDRIVEN_PIPELINE_DB
+      warehouse: EVENTDRIVEN_PIPELINE_WH
+      schema: ANALYTICS
+      threads: 4

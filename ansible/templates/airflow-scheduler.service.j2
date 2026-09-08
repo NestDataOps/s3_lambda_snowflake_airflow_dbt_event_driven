@@ -1,0 +1,14 @@
+[Unit]
+Description=Airflow scheduler
+After=network.target
+
+[Service]
+Type=simple
+User={{ airflow_user }}
+EnvironmentFile={{ airflow_home }}/airflow.env
+ExecStart={{ airflow_home }}/venv/bin/airflow scheduler
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

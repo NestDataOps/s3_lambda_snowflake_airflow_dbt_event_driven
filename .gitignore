@@ -12,7 +12,6 @@ lambda/build/
 
 airflow/logs/
 airflow/dbt/target/
-ansible/templates/
 
 # dbt
 dbt/profiles.yml
