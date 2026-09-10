@@ -8,6 +8,8 @@ crash.log
 
 
 ansible/inventory.ini
+ansible/group_vars/airflow.yml
+
 
 *DS_Store
 # Lambda build artifacts
