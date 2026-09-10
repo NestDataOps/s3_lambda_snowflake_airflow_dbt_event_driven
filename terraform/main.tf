@@ -88,6 +88,13 @@ module "lambda" {
   processed_bucket  = module.s3.processed_bucket_name
   lambda_source_dir = "${path.module}/../lambda"
   pandas_layer_arn  = var.pandas_layer_arn
+  # Derived directly from the actual EC2 instance's public IP -- always
+  # current, no separate variable to keep in sync by hand. Must match the
+  # ansible_admin_user/password set in ansible/group_vars/airflow.yml,
+  # since that's what actually creates this login on the Airflow side.
+  airflow_base_url     = "http://${module.ec2_airflow.public_ip}:8080"
+  airflow_api_user     = var.airflow_api_user
+  airflow_api_password = var.airflow_api_password
 }
 
 # ---------------------------------------------------------------------------

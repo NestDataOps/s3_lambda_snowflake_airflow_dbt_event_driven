@@ -28,6 +28,12 @@ PROCESSED_PREFIX = "processed/"
 SNOWFLAKE_CONN_ID = "snowflake_default"
 DBT_PROJECT_DIR = "/opt/airflow/dbt"
 DBT_PROFILES_DIR = "/opt/airflow/dbt"
+# dbt lives in its own venv, separate from Airflow's -- Airflow's
+# constraints file pins exact versions of shared libraries (Jinja2,
+# pydantic, etc.) that conflict with dbt-snowflake's own requirements, so
+# they can't coexist in one venv. Call the binary by full path rather than
+# relying on `dbt` being on PATH inside Airflow's own environment.
+DBT_BIN = "/opt/airflow/dbt_venv/bin/dbt"
 
 default_args = {
     "owner": "data-eng",
@@ -39,14 +45,24 @@ default_args = {
 @dag(
     dag_id="s3_to_snowflake_dbt",
     description="Senses processed Parquet -> loads Snowflake raw -> runs dbt",
-    #schedule=None,  # triggered externally; see README
-    schedule="*/5 * * * *",
+    # Lambda calls Airflow's REST API directly after writing each Parquet
+    # file (see trigger_airflow_dag() in lambda/src/handler.py), passing
+    # the exact S3 key via `conf` -- genuinely event-driven, not polling.
+    # schedule=None here means this DAG only runs when triggered: either
+    # by that Lambda callback, manually, or via `airflow dags trigger`.
+    # If you'd rather have a periodic safety net in case the Lambda
+    # callback ever fails silently (network blip, EC2 down for
+    # maintenance), a sparse fallback schedule like "0 * * * *" (hourly)
+    # is reasonable -- the wildcard sensor match + idempotent COPY INTO
+    # make it safe to run on top of the event-driven trigger without
+    # double-processing anything.
+    schedule=None,
     start_date=datetime(2026, 1, 1),
     catchup=False,
     max_active_runs=1,
     default_args=default_args,
     tags=["event-driven", "snowflake", "dbt"],
-    params={"s3_key": ""},  # passed in by the trigger (specific file), optional
+    params={"s3_key": ""},
 )
 def s3_to_snowflake_dbt():
 
@@ -60,8 +76,13 @@ def s3_to_snowflake_dbt():
         wildcard_match=True,
         aws_conn_id="aws_default",
         deferrable=True,
-        timeout=60 * 30,
-        poke_interval=30,
+        # Short timeout + soft_fail: with a 5-min polling schedule, a run
+        # that finds nothing new should skip quickly (marked "skipped",
+        # not "failed") rather than block the next scheduled run for the
+        # full 30 min this sensor would otherwise wait.
+        timeout=60 * 4,
+        poke_interval=20,
+        soft_fail=True,
     )
 
     # COPY INTO the raw landing table from the external stage. Uses
@@ -91,7 +112,7 @@ def s3_to_snowflake_dbt():
         task_id="dbt_run",
         bash_command=(
             f"cd {DBT_PROJECT_DIR} && "
-            f"/opt/airflow/dbt_venv/bin/dbt run --profiles-dir {DBT_PROFILES_DIR} --select staging marts"
+            f"{DBT_BIN} run --profiles-dir {DBT_PROFILES_DIR} --select staging marts"
         ),
     )
 
@@ -99,7 +120,7 @@ def s3_to_snowflake_dbt():
         task_id="dbt_test",
         bash_command=(
             f"cd {DBT_PROJECT_DIR} && "
-            f"/opt/airflow/dbt_venv/bin/dbt test --profiles-dir {DBT_PROFILES_DIR}"
+            f"{DBT_BIN} test --profiles-dir {DBT_PROFILES_DIR}"
         ),
     )
 

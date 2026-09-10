@@ -30,12 +30,26 @@ resource "aws_security_group" "airflow" {
     cidr_blocks = [var.allowed_cidr]
   }
 
+  # Port 8080 serves both the Airflow UI and its REST API from the same
+  # process, so they can't be split onto different ports/rules without a
+  # reverse proxy. Lambda (outside any VPC, per this project's design) has
+  # no stable, allowlist-able egress IP -- AWS routes its outbound traffic
+  # through a shared, unpredictable pool -- so this can't be restricted to
+  # var.allowed_cidr the way SSH is above without adding a NAT Gateway +
+  # Elastic IP (real ongoing cost/complexity) or switching to a
+  # signed-request pattern via API Gateway. For a project this size, the
+  # practical mitigation is requiring valid Basic Auth credentials on
+  # every request instead (see the Lambda handler and
+  # AIRFLOW__API__AUTH_BACKENDS in airflow.env.j2): the port is open, but
+  # nothing is served without a valid login. Tighten this with a NAT
+  # Gateway + fixed Elastic IP if this ever needs to be genuinely
+  # production-grade rather than a portfolio/testing setup.
   ingress {
-    description = "Airflow webserver UI"
+    description = "Airflow webserver (UI + REST API) -- open; auth-gated, see comment"
     from_port   = 8080
     to_port     = 8080
     protocol    = "tcp"
-    cidr_blocks = [var.allowed_cidr]
+    cidr_blocks = ["0.0.0.0/0"]
   }
 
   egress {

@@ -25,7 +25,10 @@ resource "aws_lambda_function" "clean_flatten" {
 
   environment {
     variables = {
-      PROCESSED_BUCKET = var.processed_bucket
+      PROCESSED_BUCKET     = var.processed_bucket
+      AIRFLOW_BASE_URL     = var.airflow_base_url
+      AIRFLOW_API_USER     = var.airflow_api_user
+      AIRFLOW_API_PASSWORD = var.airflow_api_password
     }
   }
 }

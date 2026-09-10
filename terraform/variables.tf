@@ -52,3 +52,15 @@ variable "snowflake_transformer_user" {
   description = "Snowflake username that Airflow/dbt log in as (matches snowflake_user in ansible/group_vars/airflow.yml) -- gets the TRANSFORMER role granted to it"
   type        = string
 }
+
+variable "airflow_api_user" {
+  description = "Airflow admin username Lambda authenticates as (matches airflow_admin_user in ansible/group_vars/airflow.yml)"
+  type        = string
+  default     = "admin"
+}
+
+variable "airflow_api_password" {
+  description = "Airflow admin password Lambda authenticates with (matches airflow_admin_password in ansible/group_vars/airflow.yml)"
+  type        = string
+  sensitive   = true
+}
