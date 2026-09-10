@@ -57,6 +57,7 @@ variable "state_bucket_name" {
 
 resource "aws_s3_bucket" "tf_state" {
   bucket = var.state_bucket_name
+  force_destroy = true
 
   # Prevents `terraform destroy` from ever nuking your state history by accident
   lifecycle {
