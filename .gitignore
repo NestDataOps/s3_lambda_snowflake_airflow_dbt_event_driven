@@ -15,6 +15,9 @@ lambda/build/
 
 airflow/logs/
 airflow/dbt/target/
+airflow/dbt/logs/
+dbt.log
+
 
 # dbt
 dbt/profiles.yml
