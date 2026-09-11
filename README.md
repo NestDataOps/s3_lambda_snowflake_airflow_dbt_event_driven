@@ -71,7 +71,7 @@ dbt/
 scripts/
   generate_sample_events.py   test-data generator, can upload straight to S3
 terraform-bootstrap/
-  main.tf                     one-time S3+DynamoDB remote state backend,
+  main.tf                     one-time S3+lock remote state backend,
                                shared with your other Terraform project
 ```
 
