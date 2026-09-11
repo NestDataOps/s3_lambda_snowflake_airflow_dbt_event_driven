@@ -28,7 +28,7 @@ terraform {
     bucket         = "portfolio-terraform-state-changeme" # match terraform-bootstrap output
     key            = "event-driven-pipeline/terraform.tfstate"
     region         = "ap-southeast-2"
-    dynamodb_table = "terraform-locks"
+    use_lockfile   = true
     encrypt        = true
   }
 }
